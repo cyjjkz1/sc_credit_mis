@@ -12,6 +12,7 @@ PASSWORD = 'TianTian1121@'
 HOSTNAME = 'localhost'
 DATABASE = 'creditdatabase'
 
+
 class Config:
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True
@@ -21,14 +22,18 @@ class Config:
     LOG_FILE_MAX_BYTES = 100 * 1024 * 1024
     LOG_FILE_BACKUP_COUNT = 10
 
+
 class DevelopmentConfig(Config):
     pass
+
 
 class TestingConfig(Config):
     pass
 
+
 class ProductionConfig(Config):
     pass
+
 
 config = {
     'development': DevelopmentConfig,
