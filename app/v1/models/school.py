@@ -40,10 +40,9 @@ class Major(db.Model):
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
     college_id = db.Column(db.Integer, db.ForeignKey('college.id'))
 
-    def __init__(self, name, college_id, create_time=datetime.now()):
+    def __init__(self, name, create_time=datetime.now()):
         self.name = name
         self.create_time = create_time
-        self.college_id = college_id
 
     def to_json(self):
         maj_dict = {

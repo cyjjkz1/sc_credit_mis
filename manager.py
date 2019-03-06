@@ -7,7 +7,7 @@ from flask_script import Manager, Command, Server
 from flask_migrate import Migrate, MigrateCommand
 
 
-from tests.school_db_init import AddDB
+from tests.school_db_init import DeleteCol, DeleteMaj, AddCollege
 
 # import db model
 #from app.v1 import models
@@ -28,7 +28,10 @@ class CreateDB(Command):
 manager.add_command('createdb', CreateDB)
 manager.add_command('runserver', Server(host='0.0.0.0', port=9090))
 manager.add_command('db', MigrateCommand)
-manager.add_command('adddb', AddDB)
+manager.add_command('addcol', AddCollege)
+manager.add_command('delcol', DeleteCol)
+manager.add_command('delmaj', DeleteMaj)
+
 
 
 if __name__ == '__main__':
