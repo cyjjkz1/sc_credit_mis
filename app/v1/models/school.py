@@ -40,10 +40,9 @@ class Major(db.Model):
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
     college_id = db.Column(db.Integer, db.ForeignKey('college.id'))
 
-    def __init__(self, name, college_id, create_time=datetime.now()):
+    def __init__(self, name, create_time=datetime.now()):
         self.name = name
         self.create_time = create_time
-        self.college_id = college_id
 
     def to_json(self):
         maj_dict = {
@@ -54,20 +53,60 @@ class Major(db.Model):
         return maj_dict
 
 
-class AuditDepartment(db.Model):
-    __table__ = 'audit_department'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(16), nullable=False)
-    create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
-    projects = db.relationship('Project', backref='audit_department', lazy='dynamic')
-
-
 class Category(db.Model):
     __table__ = 'category'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(16), nullable=False)
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
     projects = db.relationship('Project', backref='category', lazy='dynamic')
+
+    def __init__(self, name, create_time=datetime.now()):
+        self.name = name
+        self.create_time = create_time
+
+    def to_json(self):
+        maj_dict = {
+            'id': self.id,
+            'name': self.name,
+            'create_time': self.create_time
+        }
+        return maj_dict
+
+
+audit_project = db.Table('audit_project',
+                         db.Column('id', db.Integer, primary_key=True, autoincrement=True),
+                         db.Column('department_id', db.Integer, db.ForeignKey('audit_department.id'), nullable=False),
+                         db.Column('project_id', db.Integer, db.ForeignKey('project.id'), nullable=False)
+                         )
+
+
+class AuditDepartment(db.Model):
+    __table__ = 'audit_department'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(16), nullable=False)
+    create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    projects = db.relationship('project',
+                               secondary=audit_project,
+                               backref=db.backref('audit_departments', lazy='dynamic'),
+                               lazy='dynamic')
+
+    def __init__(self, name, create_time=datetime.now()):
+        self.name = name
+        self.create_time = create_time
+
+    def to_json(self, rel_query=False):
+        dep_dict = {
+            'id': self.id,
+            'name': self.name,
+            'create_time': self.create_time
+        }
+        if rel_query:
+            all_project = []
+            if self.projects is not None:
+                for pro in self.projects:
+                    all_project.append(pro.to_dict())
+            dep_dict['projects'] = all_project
+        return dep_dict
 
 
 class Project(db.Model):
@@ -80,4 +119,28 @@ class Project(db.Model):
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-    department_id = db.Column(db.Integer, db.ForeignKey('audit_department.id'))
+
+    def __init__(self, name, detail, max_credit, min_credit, create_time=datetime.now()):
+        self.name = name
+        self.detail = detail
+        self.max_credit = max_credit
+        self.min_credit = min_credit
+        self.create_time = create_time
+
+    def to_json(self, rel_query=False):
+        pro_dict = {
+            'id': self.id,
+            'name': self.name,
+            'detail': self.detail,
+            'max_credit': self.max_credit,
+            'min_credit': self.min_credit,
+            'create_time': self.create_time
+        }
+        if rel_query:
+            all_department = []
+            if self.audit_departments is not None:
+                for dep in self.audit_departments:
+                    all_department.append(dep.to_dict())
+            pro_dict['audit_departments'] = all_department
+        return pro_dict
+
