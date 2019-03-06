@@ -35,6 +35,5 @@ manager.add_command('delmaj', DeleteMaj)
 manager.add_command('delpro', AddProject)
 
 
-
 if __name__ == '__main__':
     manager.run()
