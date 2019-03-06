@@ -10,7 +10,7 @@ from flask_migrate import Migrate, MigrateCommand
 from tests.school_db_init import DeleteCol, DeleteMaj, AddCollege, AddProject
 
 # import db model
-#from app.v1 import models
+from app.v1 import models
 
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
@@ -32,7 +32,7 @@ manager.add_command('db', MigrateCommand)
 manager.add_command('addcol', AddCollege)
 manager.add_command('delcol', DeleteCol)
 manager.add_command('delmaj', DeleteMaj)
-manager.add_command('delpro', AddProject)
+manager.add_command('addpro', AddProject)
 
 
 

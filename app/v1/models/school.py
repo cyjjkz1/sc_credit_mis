@@ -53,24 +53,24 @@ class Major(db.Model):
         return maj_dict
 
 
-class Category(db.Model):
-    __table__ = 'category'
+class Classify(db.Model):
+    __tablename__ = 'classify'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(16), nullable=False)
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
-    projects = db.relationship('Project', backref='category', lazy='dynamic')
+    projects = db.relationship('project', backref='classify', lazy='dynamic')
 
     def __init__(self, name, create_time=datetime.now()):
         self.name = name
         self.create_time = create_time
 
     def to_json(self):
-        maj_dict = {
+        cate_dict = {
             'id': self.id,
             'name': self.name,
             'create_time': self.create_time
         }
-        return maj_dict
+        return cate_dict
 
 
 audit_project = db.Table('audit_project',
@@ -81,7 +81,7 @@ audit_project = db.Table('audit_project',
 
 
 class AuditDepartment(db.Model):
-    __table__ = 'audit_department'
+    __tablename__ = 'audit_department'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(16), nullable=False)
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
@@ -110,7 +110,7 @@ class AuditDepartment(db.Model):
 
 
 class Project(db.Model):
-    __table__ = 'project'
+    __tablename__ = 'project'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(16), nullable=False)
     detail = db.Column(db.String(200), nullable=False)
@@ -118,7 +118,7 @@ class Project(db.Model):
     min_credit = db.Column(db.Integer, nullable=False)
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    classify_id = db.Column(db.Integer, db.ForeignKey('classify.id'))
 
     def __init__(self, name, detail, max_credit, min_credit, create_time=datetime.now()):
         self.name = name
