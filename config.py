@@ -8,15 +8,15 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 # 数据库配置
 
 USER_NAME = 'manager_credit'
-PASSWORD = 'TianTian1121@'
+PASSWORD = 'TianTian1121@@'
 HOSTNAME = 'localhost'
-DATABASE = 'creditdatabase'
+DATABASE = 'credit_db'
 
 
 class Config:
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://{}:{}@{}/{}".format(USER_NAME, PASSWORD, HOSTNAME, DATABASE)
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://{}:{}@{}/{}?charset=utf8".format(USER_NAME, PASSWORD, HOSTNAME, DATABASE)
 
     LOG_PATH = os.path.join(basedir, 'logs/sc_credit_mis.log')
     LOG_FILE_MAX_BYTES = 100 * 1024 * 1024
