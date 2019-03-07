@@ -58,7 +58,7 @@ class Classify(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(16), nullable=False)
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
-    projects = db.relationship('project', backref='classify', lazy='dynamic')
+    projects = db.relationship('Project', backref='classify', lazy='dynamic')
 
     def __init__(self, name, create_time=datetime.now()):
         self.name = name
@@ -85,7 +85,7 @@ class AuditDepartment(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(16), nullable=False)
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
-    projects = db.relationship('project',
+    ad_projects = db.relationship('Project',
                                secondary=audit_project,
                                backref=db.backref('audit_departments', lazy='dynamic'),
                                lazy='dynamic')
