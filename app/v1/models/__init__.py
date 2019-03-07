@@ -3,3 +3,5 @@
 
 
 from school import College, Major, Classify, Project, AuditDepartment
+from user import User
+
