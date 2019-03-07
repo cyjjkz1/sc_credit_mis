@@ -17,10 +17,11 @@ class User(db.Model):
     role = db.Column(db.Integer, nullable=False)
     class_name = db.Column(db.String(10), nullable=False)
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
+
     college_id = db.Column(db.Integer, db.ForeignKey('college.id'))
     major_id = db.Column(db.Integer, db.ForeignKey('major.id'))
 
-    def __init__(self, name, password, user_id, role, class_name, college_id, major_id, create_time=datetime.now()):
+    def __init__(self, name, password, stu_num, role, class_name, create_time=datetime.now()):
         """
         :param name: 用户姓名
         :param password: 加密后存md5
@@ -33,11 +34,9 @@ class User(db.Model):
         """
         self.name = name
         self.password = password
-        self.user_id = user_id
+        self.user_id = stu_num
         self.role = role
         self.class_name = class_name
-        self.college_id = college_id
-        self.major_id = major_id
         self.create_time = create_time
 
     def to_json(self):
