@@ -3,7 +3,7 @@
 
 from app import db
 from flask_script import Command
-from app.v1.models.school import College, Major, Project, Category, AuditDepartment
+from app.v1.models.school import College, Major, Project, Classify, AuditDepartment
 
 
 class DeleteCol(Command):
@@ -77,10 +77,10 @@ class AddProject(Command):
         dep2 = AuditDepartment('社会科学教学部')
         dep3 = AuditDepartment('教工会')
 
-        cate1 = Category("广播电视实践项目")
-        cate2 = Category("教师工作室")
-        cate3 = Category("社会实践活动")
-        cate4 = Category("竞赛项目")
+        cate1 = Classify("广播电视实践项目")
+        cate2 = Classify("教师工作室")
+        cate3 = Classify("社会实践活动")
+        cate4 = Classify("竞赛项目")
         # name, detail, max_credit, min_credit,
         proj1 = Project("竞赛参赛", "参加国家级、省级竞赛项目，参与竞赛相关培训、取得名次等等等等等等等等等等等等等等等", 6, 2)
         proj1.category = cate4
