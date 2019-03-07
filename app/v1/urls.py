@@ -6,7 +6,7 @@ from flask_restful import Api
 from handlers.user_handler import UserHandler
 
 
-blue_print_user = Blueprint('blue_print_user', __name__, url_prefix='/credit/v1/user')
+blue_print_user = Blueprint('blue_print_user', __name__, url_prefix='/credit/v1/api/user')
 user_api = Api(blue_print_user)
 user_api.add_resource(UserHandler, '/profile')
 #user_api.add_resource('', '/login')

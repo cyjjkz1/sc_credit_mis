@@ -4,6 +4,27 @@
 from app import db
 from datetime import datetime
 
+class Session(db.Model):
+    __tablename__ = 'session'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    session_id = db.Column(db.String(60), nullable=False)
+    expire = db.Column(db.Integer, nullable=False)
+    create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id') )
+
+    def __init__(self, session_id, expire=3, create_time=datetime.now()):
+        self.session_id = session_id
+        self.expire = 3
+        self.create_time = create_time
+
+    def to_json(self):
+        cookie_dict = {
+            'sessionid': self.session_id,
+            'expire': self.expire,
+            'create_time': self.create_time
+        }
+        return cookie_dict
 
 class User(db.Model):
     """
@@ -22,6 +43,8 @@ class User(db.Model):
     major_id = db.Column(db.Integer, db.ForeignKey('major.id'))
     department_id = db.Column(db.Integer, db.ForeignKey('audit_department.id'))
 
+    projects = db.relationship('Project', backref='classify', lazy='dynamic')
+    session = db.relationship('Session', backref='user', lazy='dynamic')
     def __init__(self, name, password, account, role, class_name="未知", create_time=datetime.now()):
         """
         :param name: 用户姓名

@@ -9,4 +9,9 @@ from flask import jsonify
 class UserHandler(Resource):
     def get(self):
         app.logger.info('test get')
-        return jsonify({'aa': 'bb'})
+        return jsonify({'data': {}, 'respcd': '0000', 'respmsg': '请求成功'})
+
+
+class LoginHandler(Resource):
+    def post(self):
+
