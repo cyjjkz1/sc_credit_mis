@@ -94,6 +94,8 @@ class AuditDepartment(db.Model):
                                backref=db.backref('audit_departments', lazy='dynamic'),
                                lazy='dynamic')
 
+    users = db.relationship('User', backref='audit_department', lazy='dynamic')
+
     def __init__(self, name, create_time=datetime.now()):
         self.name = name
         self.create_time = create_time

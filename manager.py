@@ -8,8 +8,7 @@ from flask_migrate import Migrate, MigrateCommand
 
 
 from tests.school_db_init import DeleteCol, DeleteMaj, AddCollege, AddProject
-from tests.user_init import UserAdd
-
+from tests.user_init import UserAdd, UserDelete
 # import db model
 from app.v1 import models
 
@@ -35,6 +34,7 @@ manager.add_command('delcol', DeleteCol)
 manager.add_command('delmaj', DeleteMaj)
 manager.add_command('addpro', AddProject)
 manager.add_command('adduser', UserAdd)
+manager.add_command('deluser', UserDelete)
 
 if __name__ == '__main__':
     manager.run()

@@ -13,15 +13,16 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(10), nullable=False)
     password = db.Column(db.String(60), nullable=False)
-    stu_num = db.Column(db.String(20), nullable=False)
+    account = db.Column(db.String(20), nullable=False)
     role = db.Column(db.Integer, nullable=False)
-    class_name = db.Column(db.String(10), nullable=False)
+    class_name = db.Column(db.String(10), nullable=True)
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
     college_id = db.Column(db.Integer, db.ForeignKey('college.id'))
     major_id = db.Column(db.Integer, db.ForeignKey('major.id'))
+    department_id = db.Column(db.Integer, db.ForeignKey('audit_department.id'))
 
-    def __init__(self, name, password, stu_num, role, class_name, create_time=datetime.now()):
+    def __init__(self, name, password, account, role, class_name="未知", create_time=datetime.now()):
         """
         :param name: 用户姓名
         :param password: 加密后存md5
@@ -34,23 +35,40 @@ class User(db.Model):
         """
         self.name = name
         self.password = password
-        self.user_id = stu_num
+        self.account = account
         self.role = role
         self.class_name = class_name
         self.create_time = create_time
 
     def to_json(self):
-        user_dict = {
-            "name": self.name,
-            "password": self.password,
-            "user_id": self.user_id,
-            "role": self.role,
-            "class_name": self.class_name,
-            "create_time": self.create_time,
-        }
-        if self.college:
-            user_dict['college'] = self.college.name
-        if self.major:
-            user_dict['major'] = self.major.name
+        user_dict={}
+        if self.role == 1:
+            # 老师
+            user_dict = {
+                "name": self.name,
+                "password": self.password,
+                "user_id": self.user_id,
+                "role": self.role,
+                "create_time": self.create_time,
+            }
+            if self.audit_department:
+                user_dict["department"] = self.audit_department.name
+        elif self.role == 2:
+            # 学生
+            user_dict = {
+                "name": self.name,
+                "password": self.password,
+                "user_id": self.user_id,
+                "role": self.role,
+                "class_name": self.class_name,
+                "create_time": self.create_time,
+            }
+            if self.college:
+                user_dict['college'] = self.college.name
+            if self.major:
+                user_dict['major'] = self.major.name
+        else:
+            # admin
+            pass
         return user_dict;
 
