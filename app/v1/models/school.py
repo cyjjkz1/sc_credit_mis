@@ -13,6 +13,8 @@ class College(db.Model):
 
     majores = db.relationship('Major', backref='college', lazy='dynamic')
 
+    users = db.relationship('User', backref='college', lazy='dynamic')
+
     def __init__(self, name, create_time=datetime.now()):
         self.name = name
         self.create_time = create_time
@@ -39,6 +41,8 @@ class Major(db.Model):
     name = db.Column(db.String(16), nullable=False)
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
     college_id = db.Column(db.Integer, db.ForeignKey('college.id'))
+
+    users = db.relationship('User', backref='major', lazy='dynamic')
 
     def __init__(self, name, create_time=datetime.now()):
         self.name = name
