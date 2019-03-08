@@ -3,13 +3,14 @@
 
 from flask import Blueprint
 from flask_restful import Api
-from handlers.user_handler import UserHandler
+from handlers.user_handler import UserHandler, LoginHandler
 
 
 blue_print_user = Blueprint('blue_print_user', __name__, url_prefix='/credit/v1/api/user')
 user_api = Api(blue_print_user)
 user_api.add_resource(UserHandler, '/profile')
-#user_api.add_resource('', '/login')
+user_api.add_resource(LoginHandler, '/login')
+
 #user_api.add_resource('', '/logout')
 #user_api.add_resource('', '/forget')
 #

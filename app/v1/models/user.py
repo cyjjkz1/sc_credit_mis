@@ -27,6 +27,11 @@ class Session(db.Model):
         }
         return cookie_dict
 
+    def save(self):
+        db.session.add(self)
+        db.session.flush()
+        db.session.commit()
+
 
 class User(db.Model):
     """
@@ -47,6 +52,7 @@ class User(db.Model):
 
     projects = db.relationship('Project', backref='classify', lazy='dynamic')
     session = db.relationship('Session', backref='user', lazy='dynamic')
+
     def __init__(self, name, password, account, role, class_name="未知", create_time=datetime.now()):
         """
         :param name: 用户姓名
@@ -95,5 +101,10 @@ class User(db.Model):
         else:
             # admin
             pass
-        return user_dict;
+        return user_dict
+
+    def save(self):
+        db.session.add(self)
+        db.session.flush()
+        db.session.commit()
 

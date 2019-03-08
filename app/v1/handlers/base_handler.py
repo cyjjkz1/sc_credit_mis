@@ -12,7 +12,9 @@ from pymysql import err
 import functools
 from ..models.user import Session
 import datetime
-
+import hashlib
+import random
+import string
 
 def with_credit_user(func):
     @functools.wraps(func)
@@ -157,3 +159,11 @@ class BaseHandler(Resource):
         }
         resp.update(kwargs)
         return resp
+
+    def md5(self, text):
+        m = hashlib.md5()
+        m.update(text.encode('UTF-8'))
+        return m.hexdigest()
+
+    def create_session_id(self):
+        return self.md5(''.join(random.sample(string.ascii_letters + string.digits, 20)))
