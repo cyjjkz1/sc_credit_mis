@@ -9,6 +9,31 @@ from flask_restful import Resource
 from flask import request, abort
 from app.v1.constant import RESP_CODE, RESP_ERR_MSG
 from pymysql import err
+import functools
+from ..models.user import Session
+import datetime
+
+
+def with_credit_user(func):
+    @functools.wraps(func)
+    def wrapper(self, *args, **kwargs):
+        app.logger.info("cookie=%s", request.cookies)
+        self.sessionid = request.cookies.get('sessionid')
+        se = Session.query.filter_by(session_id=self.sessionid)
+        self.credit_user = se.user
+
+        exp = se.expire
+        create_time = se.create_time
+        now = datetime.datetime.now()
+        exp_time = create_time + datetime.timedelta(days=exp)
+        diff = exp_time - now
+        diff_seconds = diff.days * 86400 + diff.seconds
+        if diff_seconds > 0:
+            app.logger.info('未登陆')
+            return self.request_finish(RESP_CODE.USER_NOT_LOGIN, resperr=RESP_ERR_MSG.get(RESP_CODE.USER_NOT_LOGIN))
+        app.logger.info('sessionid: %s, userid: %s', self.sessionid, self.credit_user.id)
+        return func(self, *args, **kwargs)
+    return wrapper
 
 
 class HandlerException(Exception):
@@ -97,19 +122,19 @@ class BaseHandler(Resource):
             app.logger.warn(traceback.format_exc())
             app.logger.warn('{} 校验错误 {}'.format(e.src_name, type(e), str(e)))
             err_msg = RESP_ERR_MSG.get(RESP_CODE.PARAM_ERROR, '') + ' : {} 校验错误'.format(e.src_name)
-            raise HandlerException(RESP_CODE.PARAM_ERROR, respmsg=err_msg)
+            raise HandlerException(RESP_CODE.PARAM_ERROR, resperr=err_msg)
 
         except err.DataPackerSrcKeyNotFoundError as e:
             app.logger.warn(traceback.format_exc())
             app.logger.warn('{} 校验错误 {}'.format(e.src_name, type(e), str(e)))
             err_msg = RESP_ERR_MSG.get(RESP_CODE.PARAM_ERROR, '') + ' 缺少参数: {}'.format(e.src_name)
-            raise HandlerException(RESP_CODE.PARAM_ERROR, respmsg=err_msg)
+            raise HandlerException(RESP_CODE.PARAM_ERROR, resperr=err_msg)
 
         except err.DataPackerError as e:
             app.logger.warn(traceback.format_exc())
             app.logger.warn('{} 校验错误 {}'.format(e.src_name, type(e), str(e)))
             err_msg = RESP_ERR_MSG.get(RESP_CODE.PARAM_ERROR, '') + ' : {} 字段错误'.format(e.src_name)
-            raise HandlerException(RESP_CODE.PARAM_ERROR, respmsg=err_msg)
+            raise HandlerException(RESP_CODE.PARAM_ERROR, resperr=err_msg)
 
         finally:
             pass

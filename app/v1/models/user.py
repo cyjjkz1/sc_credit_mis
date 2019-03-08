@@ -4,6 +4,7 @@
 from app import db
 from datetime import datetime
 
+
 class Session(db.Model):
     __tablename__ = 'session'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -11,11 +12,11 @@ class Session(db.Model):
     expire = db.Column(db.Integer, nullable=False)
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id') )
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __init__(self, session_id, expire=3, create_time=datetime.now()):
         self.session_id = session_id
-        self.expire = 3
+        self.expire = expire
         self.create_time = create_time
 
     def to_json(self):
@@ -25,6 +26,7 @@ class Session(db.Model):
             'create_time': self.create_time
         }
         return cookie_dict
+
 
 class User(db.Model):
     """
