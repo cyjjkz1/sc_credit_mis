@@ -18,20 +18,28 @@ def with_credit_user(func):
     @functools.wraps(func)
     def wrapper(self, *args, **kwargs):
         app.logger.info("cookie=%s", request.cookies)
-        self.sessionid = request.cookies.get('sessionid')
-        se = Session.query.filter_by(session_id=self.sessionid)
-        self.credit_user = se.user
-
-        exp = se.expire
-        create_time = se.create_time
-        now = datetime.datetime.now()
-        exp_time = create_time + datetime.timedelta(days=exp)
-        diff = exp_time - now
-        diff_seconds = diff.days * 86400 + diff.seconds
-        if diff_seconds > 0:
+        sessionid = request.cookies.get('sessionid')
+        if sessionid is None:
             app.logger.info('未登陆')
             return self.request_finish(RESP_CODE.USER_NOT_LOGIN, resperr=RESP_ERR_MSG.get(RESP_CODE.USER_NOT_LOGIN))
-        app.logger.info('sessionid: %s, userid: %s', self.sessionid, self.credit_user.id)
+
+        se = Session.query.filter_by(session_id=self.sessionid).first()
+        if se:
+            self.credit_user = se.user
+
+            exp = se.expire
+            create_time = se.create_time
+            now = datetime.datetime.now()
+            exp_time = create_time + datetime.timedelta(days=exp)
+            diff = exp_time - now
+            diff_seconds = diff.days * 86400 + diff.seconds
+            if diff_seconds > 0:
+                app.logger.info('未登陆')
+                return self.request_finish(RESP_CODE.USER_NOT_LOGIN, resperr=RESP_ERR_MSG.get(RESP_CODE.USER_NOT_LOGIN))
+            app.logger.info('sessionid: %s, userid: %s', self.sessionid, self.credit_user.id)
+        else:
+            app.logger.info('未登陆')
+            return self.request_finish(RESP_CODE.USER_NOT_LOGIN, resperr=RESP_ERR_MSG.get(RESP_CODE.USER_NOT_LOGIN))
         return func(self, *args, **kwargs)
     return wrapper
 
