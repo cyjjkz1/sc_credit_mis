@@ -19,9 +19,9 @@ ALLOWED_EXTENSIONS = set([
 
 
 class UploadFileHandler(BaseHandler):
-    def get(self):
-        app.logger.info("file path = {}".format(files_base_url))
-        return jsonify({'path': files_base_url})
+    def post(self):
+        ret = self.handle()
+        return jsonify({ret})
 
     def allowed_file(self, filename):
         return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
