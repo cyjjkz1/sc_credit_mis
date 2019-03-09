@@ -16,6 +16,7 @@ import hashlib
 import random
 import string
 
+
 def with_credit_user(func):
     @functools.wraps(func)
     def wrapper(self, *args, **kwargs):

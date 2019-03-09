@@ -50,7 +50,6 @@ class User(db.Model):
     major_id = db.Column(db.Integer, db.ForeignKey('major.id'))
     department_id = db.Column(db.Integer, db.ForeignKey('audit_department.id'))
 
-    projects = db.relationship('Project', backref='classify', lazy='dynamic')
     session = db.relationship('Session', backref='user', lazy='dynamic')
 
     def __init__(self, name, password, account, role, class_name="未知", create_time=datetime.now()):
