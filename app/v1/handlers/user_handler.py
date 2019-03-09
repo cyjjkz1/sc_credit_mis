@@ -22,7 +22,14 @@ class UserHandler(BaseHandler):
 
     @with_credit_user
     def _handle(self, *args, **kwargs):
-        return {'data': {}, 'respcd': '0000', 'respmsg': '请求成功'}
+        try:
+            user = self.credit_user
+            if user is None:
+                raise HandlerException(respcd=RESP_CODE.DB_ERROR, respmsg=RESP_ERR_MSG.get(RESP_CODE.DB_ERROR))
+            return user.to_json()
+        except BaseException as e:
+            db.session.rollback()
+            raise e
 
 
 class LoginHandler(BaseHandler):
