@@ -44,7 +44,7 @@ class LoginHandler(BaseHandler):
         try:
             password = params['password']
             md5_pwd = self.md5(password)
-            user = User.query.fiter_by(account=params['account'])
+            user = User.query.filter_by(account=params['account']).first()
             app.logger.info('user query | user info = {}'.format(user.to_json()))
 
             if user.password == md5_pwd:
