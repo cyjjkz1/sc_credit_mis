@@ -57,7 +57,6 @@ class BaseHandler(Resource):
     GET_FIELDS = []
     POST_FIELDS = []
 
-    @with_credit_user
     def handle(self, *args, **kwargs):
         try:
             app.logger.info('<<<< Start %s.%s>>>>', self.__class__.__module__, self.__class__.__name__)

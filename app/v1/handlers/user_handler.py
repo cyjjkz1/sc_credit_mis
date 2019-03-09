@@ -20,6 +20,7 @@ class UserHandler(BaseHandler):
         ret = self.handle()
         return jsonify(ret)
 
+    @with_credit_user
     def _handle(self, *args, **kwargs):
         return {'data': {}, 'respcd': '0000', 'respmsg': '请求成功'}
 
