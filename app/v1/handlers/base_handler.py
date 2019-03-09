@@ -15,6 +15,7 @@ import datetime
 import hashlib
 import random
 import string
+from app import db
 
 
 def with_credit_user(func):
@@ -39,9 +40,12 @@ def with_credit_user(func):
             app.logger.info("exp = {}".format(exp))
             app.logger.info("exp_time = {}, diff_seconds = {}".format(exp_time, diff_seconds))
             if diff_seconds < 0:
-                app.logger.info('session 过期')
+                db.session.delete(se)
+                db.session.commit()
+                app.logger.info('account = {} session 过期, 删除session')
                 return self.request_finish(RESP_CODE.USER_NOT_LOGIN, resperr=RESP_ERR_MSG.get(RESP_CODE.USER_NOT_LOGIN))
             app.logger.info('sessionid: %s, userid: %s', sessionid, self.credit_user.id)
+            self.session_id = sessionid
         else:
             app.logger.info('未登陆')
             return self.request_finish(RESP_CODE.USER_NOT_LOGIN, resperr=RESP_ERR_MSG.get(RESP_CODE.USER_NOT_LOGIN))

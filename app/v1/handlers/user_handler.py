@@ -32,12 +32,11 @@ class LoginHandler(BaseHandler):
 
     def post(self):
         ret = self.handle()
-        if ret:
-            resp = make_response(jsonify(ret), 200)
-            if self.session_id:
-                app.logger.info('sessionid={}'.format(self.session_id))
-                resp.set_cookie('sessionid', self.session_id)
-            return resp
+        resp = make_response(jsonify(ret), 200)
+        if self.session_id:
+            app.logger.info('sessionid={}'.format(self.session_id))
+            resp.set_cookie('sessionid', self.session_id)
+        return resp
 
     def _handle(self, *args, **kwargs):
         params = self.parse_request_params()
@@ -62,6 +61,24 @@ class LoginHandler(BaseHandler):
             else:
                 raise HandlerException(respcd=RESP_CODE.DB_ERROR, respmsg=RESP_ERR_MSG.get(RESP_CODE.DB_ERROR))
 
+        except BaseException as e:
+            db.session.rollback()
+            raise e
+
+
+class LogoutHandler(BaseHandler):
+    def post(self):
+        ret = self.handle()
+        return jsonify(ret)
+
+    def _handle(self, *args, **kwargs):
+        try:
+            user = self.credit_user
+            app.logger.info("account = {} 退出登陆".format(user.account))
+            session = user.session
+            db.session.delete(session)
+            db.session.commit()
+            return {}
         except BaseException as e:
             db.session.rollback()
             raise e
