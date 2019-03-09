@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-from flask_restful import Resource
+#from flask_restful import Resource
 from ..models.user import Session, User
 from flask import current_app as app
 from flask import jsonify
@@ -9,14 +9,16 @@ from data_packer import RequiredField, converter
 from data_packer.checker import (
     ReChecker
 )
-POST_accout = RequiredField('account', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,20}'))
+from app import db
+from ..constant import RESP_CODE, RESP_ERR_MSG
+POST_account = RequiredField('account', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,20}'))
 POST_password = RequiredField('password', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9a-zA-Z]{8,20}'))
+
 
 
 class UserHandler(BaseHandler):
     def get(self):
         app.logger.info('test get')
-        self.gogo()
         return jsonify({'data': {}, 'respcd': '0000', 'respmsg': '请求成功'})
 
     @with_credit_user
@@ -35,6 +37,7 @@ class LoginHandler(BaseHandler):
             return jsonify(ret)
 
     def _handle(self, *args, **kwargs):
+        app.logger.info('11111111111111111111111')
         params = self.parse_request_params()
         app.logger.info('func=parse_request_params | parse_params = {} '.format(params))
         try:
