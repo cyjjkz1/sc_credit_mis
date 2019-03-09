@@ -56,15 +56,15 @@ class LoginHandler(BaseHandler):
 
             if user.password == md5_pwd:
                 # 密码正确，可以打cookie
-                if user.session:
-                    db.session.delte(user.session)
+                if user.session.first() is not None:
+                    db.session.delete(user.session.first())
                     db.session.commit()
                 new_session_id = self.create_session_id()
                 self.session_id = new_session_id
                 session = Session(session_id=new_session_id)
                 session.user = user
                 session.save()
-                return user.to_json()
+                return {'sessionid': new_session_id}
             else:
                 raise HandlerException(respcd=RESP_CODE.DB_ERROR, respmsg=RESP_ERR_MSG.get(RESP_CODE.DB_ERROR))
 
@@ -78,15 +78,16 @@ class LogoutHandler(BaseHandler):
         ret = self.handle()
         return jsonify(ret)
 
+    @with_credit_user
     def _handle(self, *args, **kwargs):
         try:
             user = self.credit_user
             app.logger.info("account = {} 退出登陆".format(user.account))
-            session = user.session
+            session = user.session.first()
+            app.logger.info("delete session = {}".format(session.session_id))
             db.session.delete(session)
             db.session.commit()
-            return {}
+            return {'account': user.account}
         except BaseException as e:
             db.session.rollback()
             raise e
-
