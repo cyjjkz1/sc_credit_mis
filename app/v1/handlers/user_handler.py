@@ -50,6 +50,9 @@ class LoginHandler(BaseHandler):
 
             if user.password == md5_pwd:
                 # 密码正确，可以打cookie
+                if user.session:
+                    db.session.delte(user.session)
+                    db.session.commit()
                 new_session_id = self.create_session_id()
                 self.session_id = new_session_id
                 session = Session(session_id=new_session_id)
