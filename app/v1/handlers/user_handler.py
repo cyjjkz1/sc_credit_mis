@@ -12,7 +12,7 @@ from data_packer.checker import (
 from app import db
 from ..constant import RESP_CODE, RESP_ERR_MSG
 POST_account = RequiredField('account', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,20}'))
-POST_password = RequiredField('password', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9a-zA-Z]{8,20}'))
+POST_password = RequiredField('password', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9a-zA-Z]{6,20}'))
 
 
 
@@ -44,6 +44,8 @@ class LoginHandler(BaseHandler):
             password = params['password']
             md5_pwd = self.md5(password)
             user = User.query.fiter_by(account=params['account'])
+            app.logger.info('user query | user info = {}'.format(user.to_json()))
+
             if user.password == md5_pwd:
                 # 密码正确，可以打cookie
 
