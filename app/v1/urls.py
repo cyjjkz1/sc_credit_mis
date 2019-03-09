@@ -12,7 +12,10 @@ user_api.add_resource(UserHandler, '/profile')
 user_api.add_resource(LoginHandler, '/login')
 user_api.add_resource(LogoutHandler, '/logout')
 user_api.add_resource(ChangePasswordHandler, '/change_pwd')
-user_api.add_resource(UploadFileHandler, '/upload')
+
+blue_print_upload = Blueprint('blue_print_upload', __name__, url_prefix='/credit/v1/api/file')
+upload_api = Api(blue_print_user)
+upload_api.add_resource(UploadFileHandler, '/upload')
 
 #user_api.add_resource('', '/logout')
 #user_api.add_resource('', '/forget')

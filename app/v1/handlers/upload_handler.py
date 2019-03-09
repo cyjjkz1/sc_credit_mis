@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-from ..models.user import Session, User
+from ..models.user import User
 from flask import current_app as app
 from flask import jsonify
 from base_handler import with_credit_user, BaseHandler, HandlerException
@@ -9,12 +9,11 @@ from ..constant import RESP_CODE, RESP_ERR_MSG, files_base_url
 
 
 class UploadFileHandler(BaseHandler):
-    def post(self):
+    def get(self):
+        app.logger.info("file path = {}".format(files_base_url))
         return jsonify({'path': files_base_url})
 
     def _handle(self, *args, **kwargs):
-
-
         # params = self.parse_request_params()
         # app.logger.info('func=parse_request_params | parse_params = {} '.format(params))
         try:

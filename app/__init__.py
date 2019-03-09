@@ -18,10 +18,10 @@ def create_app(config_name):
     db.init_app(app)
 
     # 配置蓝图
-    from v1.urls import blue_print_user
+    from v1.urls import blue_print_user, blue_print_upload
     app.register_blueprint(blue_print_user)
-
-    #配置日志
+    app.register_blueprint(blue_print_upload)
+    # 配置日志
     import logging
     from logging.handlers import RotatingFileHandler
     # Formatter
@@ -33,6 +33,7 @@ def create_app(config_name):
     app.logger.setLevel(logging.INFO)
 
     return app
+
 
 if __name__ == '__main__':
     scApp = create_app()
