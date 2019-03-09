@@ -37,6 +37,7 @@ class LoginHandler(BaseHandler):
     POST_FIELDS = [
         POST_account, POST_password, POST_role
     ]
+    session_id = None
 
     def post(self):
         ret = self.handle()
