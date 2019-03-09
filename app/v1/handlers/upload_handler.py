@@ -43,8 +43,8 @@ class UploadFileHandler(BaseHandler):
                     app.logger.info('filename is %s' % origin_file_name)
                     # filename = secure_filename(file.filename)
                     ext = origin_file_name.rsplit('.', 1)[1]
-                    now_time = datetime.datetime.now();
-                    filename = now_time.strftime('%Y%m%d%H%M%S%f') + ext
+                    now_time = datetime.datetime.now()
+                    filename = now_time.strftime('%Y%m%d%H%M%S%f') + '.' + ext
                     if os.path.exists(files_base_url):
                         app.logger.debug('%s path exist' % files_base_url)
                         pass
