@@ -3,7 +3,7 @@
 
 import os
 
-files_base_url = os.path.dirname(os.path.abspath(__file__))
+files_base_url = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploadfiles')
 
 
 class RESP_CODE(object):

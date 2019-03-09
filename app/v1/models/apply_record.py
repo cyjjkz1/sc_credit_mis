@@ -79,3 +79,7 @@ class ApplyFile(db.Model):
         }
         return col_dict
 
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
