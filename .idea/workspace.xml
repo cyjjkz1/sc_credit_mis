@@ -27,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/v1/models/apply_record.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="67" column="66" selection-start-line="67" selection-start-column="66" selection-end-line="67" selection-end-column="66" />
+            <state relative-caret-position="343">
+              <caret line="19" column="61" selection-start-line="19" selection-start-column="61" selection-end-line="19" selection-end-column="61" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -63,8 +63,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/v1/models/school.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="127" column="17" selection-start-line="127" selection-start-column="4" selection-end-line="127" selection-end-column="17" />
+            <state relative-caret-position="38">
+              <caret line="117" column="13" selection-start-line="117" selection-start-column="6" selection-end-line="117" selection-end-column="13" />
               <folding>
                 <element signature="e#46#64#0" expanded="true" />
               </folding>
@@ -259,12 +259,12 @@
       <updated>1551772129777</updated>
       <workItem from="1551772131475" duration="7162000" />
       <workItem from="1551838617307" duration="15066000" />
-      <workItem from="1551961480278" duration="36561000" />
+      <workItem from="1551961480278" duration="36790000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58789000" />
+    <option name="totallyTimeSpent" value="59018000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="46" y="23" width="1571" height="977" extended-state="0" />
@@ -438,16 +438,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/v1/models/school.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="127" column="17" selection-start-line="127" selection-start-column="4" selection-end-line="127" selection-end-column="17" />
-          <folding>
-            <element signature="e#46#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/v1/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -478,10 +468,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/v1/models/school.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="117" column="13" selection-start-line="117" selection-start-column="6" selection-end-line="117" selection-end-column="13" />
+          <folding>
+            <element signature="e#46#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/v1/models/apply_record.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="67" column="66" selection-start-line="67" selection-start-column="66" selection-end-line="67" selection-end-column="66" />
+        <state relative-caret-position="343">
+          <caret line="19" column="61" selection-start-line="19" selection-start-column="61" selection-end-line="19" selection-end-column="61" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

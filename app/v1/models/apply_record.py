@@ -17,7 +17,7 @@ class ApplyRecord(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     apply_file_id = db.Column(db.Integer, db.ForeignKey('apply_file.id'))
-    project = db.Column(db.Integer, db.ForeignKey('project.id'))
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
 
     def __init__(self,
                  apply_year,
