@@ -3,7 +3,7 @@
 
 import os
 
-files_base_url = os.path.abspath(__name__)
+files_base_url = os.path.dirname(os.path.abspath(__file__))
 
 
 class RESP_CODE(object):
