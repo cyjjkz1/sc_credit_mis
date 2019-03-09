@@ -53,7 +53,6 @@ class User(db.Model):
     session = db.relationship('Session', backref='user', lazy='dynamic')
     apply_records = db.relationship('ApplyRecord', backref='r_user', lazy='dynamic')
 
-
     def __init__(self, name, password, account, role, class_name="未知", create_time=datetime.now()):
         """
         :param name: 用户姓名
