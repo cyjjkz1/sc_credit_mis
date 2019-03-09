@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4f1ec8f3-bc4f-4bbe-9da7-c5e78184b8dd" name="Default Changelist" comment="" />
+    <list default="true" id="4f1ec8f3-bc4f-4bbe-9da7-c5e78184b8dd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/v1/handlers/base_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/v1/handlers/base_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/v1/handlers/user_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/v1/handlers/user_handler.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,8 +17,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/v1/models/user.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="969">
-              <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
+            <state relative-caret-position="201">
+              <caret line="52" column="52" selection-start-line="52" selection-start-column="52" selection-end-line="52" selection-end-column="52" />
               <folding>
                 <element signature="e#46#64#0" expanded="true" />
               </folding>
@@ -46,8 +50,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/v1/handlers/base_handler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="72" column="26" selection-start-line="72" selection-start-column="23" selection-end-line="72" selection-end-column="26" />
+            <state relative-caret-position="467">
+              <caret line="45" column="38" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="38" />
               <folding>
                 <element signature="e#45#61#0" expanded="true" />
               </folding>
@@ -88,8 +92,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/v1/handlers/user_handler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+            <state relative-caret-position="204">
+              <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
               <folding>
                 <element signature="e#81#120#0" expanded="true" />
               </folding>
@@ -155,14 +159,14 @@
         <option value="$PROJECT_DIR$/app/v1/utils/__init__.py" />
         <option value="$PROJECT_DIR$/app/v1/utils/tools.py" />
         <option value="$PROJECT_DIR$/app/v1/urls.py" />
-        <option value="$PROJECT_DIR$/app/v1/handlers/base_handler.py" />
         <option value="$PROJECT_DIR$/app/v1/models/user.py" />
+        <option value="$PROJECT_DIR$/app/v1/handlers/base_handler.py" />
         <option value="$PROJECT_DIR$/app/v1/handlers/user_handler.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="476" />
+    <option name="x" value="131" />
     <option name="y" value="23" />
     <option name="width" value="1571" />
     <option name="height" value="977" />
@@ -208,13 +212,6 @@
             <path>
               <item name="sc_credit_mis" type="b2602c69:ProjectViewProjectNode" />
               <item name="sc_credit_mis" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="v1" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sc_credit_mis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sc_credit_mis" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -254,17 +251,18 @@
       <updated>1551772129777</updated>
       <workItem from="1551772131475" duration="7162000" />
       <workItem from="1551838617307" duration="15066000" />
-      <workItem from="1551961480278" duration="13437000" />
+      <workItem from="1551961480278" duration="14324000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35665000" />
+    <option name="totallyTimeSpent" value="36552000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="476" y="23" width="1571" height="977" extended-state="0" />
+    <frame x="131" y="23" width="1571" height="977" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18966645" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18966645" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -278,7 +276,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.3299435" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.14237288" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -417,8 +415,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/v1/models/user.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
+        <state relative-caret-position="201">
+          <caret line="52" column="52" selection-start-line="52" selection-start-column="52" selection-end-line="52" selection-end-column="52" />
           <folding>
             <element signature="e#46#64#0" expanded="true" />
           </folding>
@@ -427,8 +425,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/v1/handlers/base_handler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="72" column="26" selection-start-line="72" selection-start-column="23" selection-end-line="72" selection-end-column="26" />
+        <state relative-caret-position="467">
+          <caret line="45" column="38" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="38" />
           <folding>
             <element signature="e#45#61#0" expanded="true" />
           </folding>
@@ -437,8 +435,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/v1/handlers/user_handler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        <state relative-caret-position="204">
+          <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
           <folding>
             <element signature="e#81#120#0" expanded="true" />
           </folding>

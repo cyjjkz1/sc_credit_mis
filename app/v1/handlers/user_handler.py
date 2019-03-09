@@ -17,12 +17,11 @@ POST_password = RequiredField('password', converter=converter.TypeConverter(str)
 
 class UserHandler(BaseHandler):
     def get(self):
-        app.logger.info('test get')
-        return jsonify({'data': {}, 'respcd': '0000', 'respmsg': '请求成功'})
+        ret = self.handle()
+        return jsonify(ret)
 
-    @with_credit_user
-    def gogo(self):
-        pass
+    def _handle(self, *args, **kwargs):
+        return {'data': {}, 'respcd': '0000', 'respmsg': '请求成功'}
 
 
 class LoginHandler(BaseHandler):
@@ -51,6 +50,7 @@ class LoginHandler(BaseHandler):
                 new_session_id = self.create_session_id()
                 self.session_id = new_session_id
                 session = Session(session_id=new_session_id)
+                session.user = user
                 session.save()
                 return user.to_json()
             else:

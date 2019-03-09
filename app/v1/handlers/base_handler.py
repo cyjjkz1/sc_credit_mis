@@ -9,7 +9,6 @@ from flask import current_app as app
 from flask_restful import Resource
 from flask import request, abort
 from app.v1.constant import RESP_CODE, RESP_ERR_MSG
-from pymysql import err
 import functools
 from ..models.user import Session
 import datetime
@@ -38,7 +37,7 @@ def with_credit_user(func):
             diff = exp_time - now
             diff_seconds = diff.days * 86400 + diff.seconds
             if diff_seconds > 0:
-                app.logger.info('未登陆')
+                app.logger.info('session 过期')
                 return self.request_finish(RESP_CODE.USER_NOT_LOGIN, resperr=RESP_ERR_MSG.get(RESP_CODE.USER_NOT_LOGIN))
             app.logger.info('sessionid: %s, userid: %s', self.sessionid, self.credit_user.id)
         else:
@@ -58,6 +57,7 @@ class BaseHandler(Resource):
     GET_FIELDS = []
     POST_FIELDS = []
 
+    @with_credit_user
     def handle(self, *args, **kwargs):
         try:
             app.logger.info('<<<< Start %s.%s>>>>', self.__class__.__module__, self.__class__.__name__)
