@@ -38,7 +38,6 @@ class LoginHandler(BaseHandler):
             return resp
 
     def _handle(self, *args, **kwargs):
-        app.logger.info('11111111111111111111111')
         params = self.parse_request_params()
         app.logger.info('func=parse_request_params | parse_params = {} '.format(params))
         try:
@@ -53,7 +52,7 @@ class LoginHandler(BaseHandler):
                 self.session_id = new_session_id
                 session = Session(session_id=new_session_id)
                 session.save()
-                return {'name': user.name}
+                return user.to_json()
             else:
                 raise HandlerException(respcd=RESP_CODE.DB_ERROR, respmsg=RESP_ERR_MSG.get(RESP_CODE.DB_ERROR))
 

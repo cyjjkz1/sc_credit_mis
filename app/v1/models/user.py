@@ -75,9 +75,9 @@ class User(db.Model):
         if self.role == 1:
             # 老师
             user_dict = {
+                "id": self.id,
                 "name": self.name,
-                "password": self.password,
-                "user_id": self.user_id,
+                "account": self.account,
                 "role": self.role,
                 "create_time": self.create_time,
             }
@@ -86,9 +86,9 @@ class User(db.Model):
         elif self.role == 2:
             # 学生
             user_dict = {
+                "id": self.id,
                 "name": self.name,
-                "password": self.password,
-                "user_id": self.user_id,
+                "account": self.account,
                 "role": self.role,
                 "class_name": self.class_name,
                 "create_time": self.create_time,
