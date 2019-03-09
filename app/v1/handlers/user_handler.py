@@ -58,7 +58,7 @@ class LoginHandler(BaseHandler):
             app.logger.info('user query | user info = {}'.format(user.to_json()))
 
             if user.password == md5_pwd:
-                if user.role != params['role']:
+                if str(user.role) != str(params['role']):
                     raise HandlerException(respcd=RESP_CODE.USER_NOT_LOGIN, respmsg='用户角色错误')
 
                 # 密码正确，可以打cookie
