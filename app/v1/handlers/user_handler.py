@@ -13,6 +13,7 @@ from app import db
 from ..constant import RESP_CODE, RESP_ERR_MSG
 POST_account = RequiredField('account', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,20}'))
 POST_password = RequiredField('password', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9a-zA-Z]{6,20}'))
+POST_role = RequiredField('account', converter=converter.TypeConverter(str), checker=ReChecker(r'[12]{1}'))
 
 
 class UserHandler(BaseHandler):
@@ -34,7 +35,7 @@ class UserHandler(BaseHandler):
 
 class LoginHandler(BaseHandler):
     POST_FIELDS = [
-        POST_account, POST_password
+        POST_account, POST_password, POST_role
     ]
 
     def post(self):
@@ -57,7 +58,7 @@ class LoginHandler(BaseHandler):
             if user.password == md5_pwd:
                 # 密码正确，可以打cookie
                 if user.session:
-                    db.session.delte(user.session)
+                    db.session.delete(user.session)
                     db.session.commit()
                 new_session_id = self.create_session_id()
                 self.session_id = new_session_id
