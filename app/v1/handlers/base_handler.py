@@ -26,7 +26,7 @@ def with_credit_user(func):
             app.logger.info('未登陆')
             return self.request_finish(RESP_CODE.USER_NOT_LOGIN, resperr=RESP_ERR_MSG.get(RESP_CODE.USER_NOT_LOGIN))
 
-        se = Session.query.filter_by(session_id=self.sessionid).first()
+        se = Session.query.filter_by(session_id=sessionid).first()
         if se:
             self.credit_user = se.user
 
@@ -36,10 +36,12 @@ def with_credit_user(func):
             exp_time = create_time + datetime.timedelta(days=exp)
             diff = exp_time - now
             diff_seconds = diff.days * 86400 + diff.seconds
-            if diff_seconds > 0:
+            app.logger.info("exp = {}".format(exp))
+            app.logger.info("exp_time = {}, diff_seconds = {}".format(exp_time, diff_seconds))
+            if diff_seconds < 0:
                 app.logger.info('session 过期')
                 return self.request_finish(RESP_CODE.USER_NOT_LOGIN, resperr=RESP_ERR_MSG.get(RESP_CODE.USER_NOT_LOGIN))
-            app.logger.info('sessionid: %s, userid: %s', self.sessionid, self.credit_user.id)
+            app.logger.info('sessionid: %s, userid: %s', sessionid, self.credit_user.id)
         else:
             app.logger.info('未登陆')
             return self.request_finish(RESP_CODE.USER_NOT_LOGIN, resperr=RESP_ERR_MSG.get(RESP_CODE.USER_NOT_LOGIN))

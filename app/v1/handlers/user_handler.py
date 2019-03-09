@@ -36,7 +36,7 @@ class LoginHandler(BaseHandler):
             resp = make_response(jsonify(ret), 200)
             if self.session_id:
                 app.logger.info('sessionid={}'.format(self.session_id))
-                resp.set_cookie('sessionid', self.session_id, domain='192.168.0.218')
+                resp.set_cookie('sessionid', self.session_id)
             return resp
 
     def _handle(self, *args, **kwargs):
