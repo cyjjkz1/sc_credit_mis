@@ -13,7 +13,7 @@ from app import db
 from ..constant import RESP_CODE, RESP_ERR_MSG
 POST_account = RequiredField('account', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,20}'))
 POST_password = RequiredField('password', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9a-zA-Z]{6,20}'))
-POST_role = RequiredField('account', converter=converter.TypeConverter(str), checker=ReChecker(r'[12]{1}'))
+POST_role = RequiredField('role', converter=converter.TypeConverter(str), checker=ReChecker(r'[12]{1}'))
 POST_new_pwd = RequiredField('new_password', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9a-zA-Z]{6,20}'))
 
 

@@ -65,7 +65,7 @@ class ApplyFile(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(20), nullable=False)
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
-    apply_record = db.relationship('ApplyRecord', backref='apply_file', lazy='dynamic', uselist=False)
+    records = db.relationship('ApplyRecord', backref='apply_file', lazy='dynamic', uselist=False)
 
     def __init__(self, name, create_time=datetime.now()):
         self.name = name
