@@ -90,9 +90,9 @@ class AuditDepartment(db.Model):
     name = db.Column(db.String(16), nullable=False)
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
     ad_projects = db.relationship('Project',
-                               secondary=audit_project,
-                               backref=db.backref('audit_departments', lazy='dynamic'),
-                               lazy='dynamic')
+                                  secondary=audit_project,
+                                  backref=db.backref('audit_departments', lazy='dynamic'),
+                                  lazy='dynamic')
 
     users = db.relationship('User', backref='audit_department', lazy='dynamic')
 
@@ -125,6 +125,7 @@ class Project(db.Model):
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
     classify_id = db.Column(db.Integer, db.ForeignKey('classify.id'))
+    apply_records = db.relationship('ApplyRecord', backref='project', lazy='dynamic')
 
     def __init__(self, name, detail, max_credit, min_credit, create_time=datetime.now()):
         self.name = name

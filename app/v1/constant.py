@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
+import os
+
+files_base_url = os.path.abspath(__name__)
+
 
 class RESP_CODE(object):
     """

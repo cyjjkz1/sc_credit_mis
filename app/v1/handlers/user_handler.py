@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-#from flask_restful import Resource
+# from flask_restful import Resource
 from ..models.user import Session, User
 from flask import current_app as app
 from flask import jsonify, make_response
@@ -14,6 +14,7 @@ from ..constant import RESP_CODE, RESP_ERR_MSG
 POST_account = RequiredField('account', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,20}'))
 POST_password = RequiredField('password', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9a-zA-Z]{6,20}'))
 POST_role = RequiredField('account', converter=converter.TypeConverter(str), checker=ReChecker(r'[12]{1}'))
+POST_new_pwd = RequiredField('new_password', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9a-zA-Z]{6,20}'))
 
 
 class UserHandler(BaseHandler):
@@ -57,8 +58,10 @@ class LoginHandler(BaseHandler):
             app.logger.info('user query | user info = {}'.format(user.to_json()))
 
             if user.password == md5_pwd:
-                # 密码正确，可以打cookie
+                if user.role != params['role']:
+                    raise HandlerException(respcd=RESP_CODE.USER_NOT_LOGIN, respmsg='用户角色错误')
 
+                # 密码正确，可以打cookie
                 if user.session.first() is not None:
                     db.session.delete(user.session.first())
                     db.session.commit()
@@ -69,7 +72,7 @@ class LoginHandler(BaseHandler):
                 session.save()
                 return {'sessionid': new_session_id}
             else:
-                raise HandlerException(respcd=RESP_CODE.DB_ERROR, respmsg=RESP_ERR_MSG.get(RESP_CODE.DB_ERROR))
+                raise HandlerException(respcd=RESP_CODE.USER_NOT_LOGIN, respmsg='密码错误，请重新输入密码')
 
         except BaseException as e:
             db.session.rollback()
@@ -91,6 +94,33 @@ class LogoutHandler(BaseHandler):
             db.session.delete(session)
             db.session.commit()
             return {'account': user.account}
+        except BaseException as e:
+            db.session.rollback()
+            raise e
+
+
+class ChangePasswordHandler(BaseHandler):
+    POST_FIELDS = [
+        POST_password, POST_new_pwd
+    ]
+
+    def post(self):
+        ret = self.handle()
+        return jsonify(ret)
+
+    @with_credit_user
+    def _handle(self, *args, **kwargs):
+        params = self.parse_request_params()
+        app.logger.info('func=parse_request_params | parse_params = {} '.format(params))
+        try:
+            user = self.credit_user
+            if user.password == params['password']:
+                user.password = params['new_password']
+                app.logger.info("account = {} 密码已经修改".format(user.account))
+                db.session.commit()
+                return {'account': user.account}
+            else:
+                raise HandlerException(respcd=RESP_CODE.USER_NOT_LOGIN, respmsg='原密码错误，请重新输入密码')
         except BaseException as e:
             db.session.rollback()
             raise e
