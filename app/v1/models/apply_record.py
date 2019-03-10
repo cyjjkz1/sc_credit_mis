@@ -63,12 +63,12 @@ class ApplyRecord(db.Model):
 class ApplyFile(db.Model):
     __tablename__ = 'apply_file'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(20), nullable=False)
+    filename = db.Column(db.String(30), nullable=False)
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
     records = db.relationship('ApplyRecord', backref='apply_file', uselist=False)
 
-    def __init__(self, name, create_time=datetime.now()):
-        self.name = name
+    def __init__(self, filename, create_time=datetime.now()):
+        self.filename = filename
         self.create_time = create_time
 
     def to_dict(self):

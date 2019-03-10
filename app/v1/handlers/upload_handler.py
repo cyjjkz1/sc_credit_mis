@@ -21,7 +21,7 @@ ALLOWED_EXTENSIONS = set([
 class UploadFileHandler(BaseHandler):
     def post(self):
         ret = self.handle()
-        return jsonify({ret})
+        return jsonify(ret)
 
     def allowed_file(self, filename):
         return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
