@@ -115,6 +115,7 @@ class ChangePasswordHandler(BaseHandler):
         try:
             user = self.credit_user
             origin_password = self.md5(params['password'])
+            app.logger.info('origin password = '.format(origin_password))
             if user.password == origin_password:
                 user.password = self.md5(params['new_password'])
                 app.logger.info("account = {} 密码已经修改".format(user.account))
