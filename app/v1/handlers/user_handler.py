@@ -27,7 +27,7 @@ class UserHandler(BaseHandler):
         try:
             user = self.credit_user
             if user is None:
-                raise HandlerException(respcd=RESP_CODE.DB_ERROR, respmsg=RESP_ERR_MSG.get(RESP_CODE.DB_ERROR))
+                raise HandlerException(respcd=RESP_CODE.USER_NOT_LOGIN, respmsg=RESP_ERR_MSG.get(RESP_CODE.USER_NOT_LOGIN))
             return user.to_json()
         except BaseException as e:
             db.session.rollback()

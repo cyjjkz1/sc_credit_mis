@@ -25,8 +25,7 @@ def with_credit_user(func):
         sessionid = request.cookies.get('sessionid')
         if sessionid is None:
             app.logger.info('未登陆')
-            return self.request_finish(RESP_CODE.USER_NOT_LOGIN, resperr=RESP_ERR_MSG.get(RESP_CODE.USER_NOT_LOGIN))
-
+            raise HandlerException(respcd=RESP_CODE.USER_NOT_LOGIN, respmsg=RESP_ERR_MSG.get(RESP_CODE.USER_NOT_LOGIN))
         se = Session.query.filter_by(session_id=sessionid).first()
         if se:
             self.credit_user = se.user
@@ -43,12 +42,12 @@ def with_credit_user(func):
                 db.session.delete(se)
                 db.session.commit()
                 app.logger.info('account = {} session 过期, 删除session')
-                return self.request_finish(RESP_CODE.USER_NOT_LOGIN, resperr=RESP_ERR_MSG.get(RESP_CODE.USER_NOT_LOGIN))
+                raise HandlerException(respcd=RESP_CODE.USER_NOT_LOGIN, respmsg=RESP_ERR_MSG.get(RESP_CODE.USER_NOT_LOGIN))
             app.logger.info('sessionid: %s, userid: %s', sessionid, self.credit_user.id)
             self.session_id = sessionid
         else:
             app.logger.info('未登陆')
-            return self.request_finish(RESP_CODE.USER_NOT_LOGIN, resperr=RESP_ERR_MSG.get(RESP_CODE.USER_NOT_LOGIN))
+            raise HandlerException(respcd=RESP_CODE.USER_NOT_LOGIN, respmsg=RESP_ERR_MSG.get(RESP_CODE.USER_NOT_LOGIN))
         return func(self, *args, **kwargs)
     return wrapper
 
