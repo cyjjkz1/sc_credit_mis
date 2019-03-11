@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 from ..models.apply_record import ApplyFile
 from flask import current_app as app
-from flask import request, jsonif, send_from_directory
+from flask import abort, request, jsonify, send_from_directory
 from base_handler import with_credit_user, BaseHandler, HandlerException
 from app import db
 from ..constant import RESP_CODE, files_base_url
@@ -21,7 +21,7 @@ ALLOWED_EXTENSIONS = set([
 class UploadFileHandler(BaseHandler):
     def post(self):
         ret = self.handle()
-        return jsonify({ret})
+        return jsonify(ret)
 
     def allowed_file(self, filename):
         return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
@@ -66,12 +66,16 @@ class UploadFileHandler(BaseHandler):
                 raise e
 
 
-class DownloadHandle(db.Model):
-    def get(self):
+class DownloadHandle(BaseHandler):
+    def get(self, filename):
         if request.method == "GET":
+<<<<<<< HEAD
             app.logger.info(request.url)
             filename = request.url.rsplit('uploadfiles/', 1)[1]
 
+=======
+            app.logger.info(filename)
+>>>>>>> 86ee8a991d7ef7ea6ab18e47697d71eba5c495f9
             if os.path.isfile(os.path.join(files_base_url, filename)):
                 return send_from_directory(files_base_url, filename, as_attachment=True)
             abort(404)
