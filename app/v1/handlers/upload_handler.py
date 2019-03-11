@@ -69,13 +69,7 @@ class UploadFileHandler(BaseHandler):
 class DownloadHandle(BaseHandler):
     def get(self, filename):
         if request.method == "GET":
-<<<<<<< HEAD
-            app.logger.info(request.url)
-            filename = request.url.rsplit('uploadfiles/', 1)[1]
-
-=======
             app.logger.info(filename)
->>>>>>> 86ee8a991d7ef7ea6ab18e47697d71eba5c495f9
             if os.path.isfile(os.path.join(files_base_url, filename)):
                 return send_from_directory(files_base_url, filename, as_attachment=True)
             abort(404)
