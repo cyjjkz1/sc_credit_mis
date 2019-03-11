@@ -71,6 +71,7 @@ class DownloadHandle(db.Model):
         if request.method == "GET":
             app.logger.info(request.url)
             filename = request.url.rsplit('uploadfiles/', 1)[1]
+
             if os.path.isfile(os.path.join(files_base_url, filename)):
                 return send_from_directory(files_base_url, filename, as_attachment=True)
             abort(404)
