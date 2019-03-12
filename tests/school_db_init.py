@@ -13,6 +13,7 @@ class DeleteCol(Command):
             db.session.delete(col)
         db.session.commit()
 
+
 class DeleteMaj(Command):
     def run(self):
         majs = Major.query.all()

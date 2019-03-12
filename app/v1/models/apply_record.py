@@ -14,7 +14,7 @@ class ApplyRecord(db.Model):
     audit_credit = db.Column(db.Integer, nullable=True)
     audit_remark = db.Column(db.String(200), nullable=False)
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
-
+    create_time = db.Column(db.DateTime, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     apply_file_id = db.Column(db.Integer, db.ForeignKey('apply_file.id'))
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
@@ -25,18 +25,18 @@ class ApplyRecord(db.Model):
                  apply_credit,
                  apply_detail,
                  apply_remark,
-                 audit_credit,
-                 audit_remark,
+                 user_id,
+                 apply_file_id,
+                 project_id,
                  create_time=datetime.now()):
         self.apply_year = apply_year
         self.apply_term = apply_term
         self.apply_credit = apply_credit
         self.apply_detail = apply_detail
         self.apply_remark = apply_remark
-
-        self.audit_credit = audit_credit
-        self.audit_remark = audit_remark
-
+        self.user_id = user_id
+        self.apply_file_id = apply_file_id
+        self.project_id = project_id
         self.create_time = create_time
 
     def to_dict(self, rel_query=False):
@@ -50,12 +50,13 @@ class ApplyRecord(db.Model):
             "audit_remark": self.audit_remark,
             "create_time": self.create_time
         }
-        if self.r_user:
-            red_dict['name'] = self.r_user.name
-        if self.apply_file:
-            red_dict['apply_file'] = self.apply_file.name
-        if self.project:
-            red_dict['project_name'] = self.project.name
+        if rel_query:
+            if self.r_user:
+                red_dict['name'] = self.r_user.name
+            if self.apply_file:
+                red_dict['apply_file'] = self.apply_file.name
+            if self.project:
+                red_dict['project_name'] = self.project.name
 
         return red_dict
 
