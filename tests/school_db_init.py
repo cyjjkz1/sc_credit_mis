@@ -131,6 +131,9 @@ class AddProject(Command):
         proj10.classify = cate1
         proj10.audit_departments = [dep3]
 
+        db.session.add(proj1)
+        db.session.add(proj2)
+        db.session.add(proj3)
         db.session.add(proj4)
         db.session.add(proj5)
         db.session.add(proj6)
