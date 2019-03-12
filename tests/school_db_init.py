@@ -74,37 +74,40 @@ class AddCollege(Command):
 
 class AddProject(Command):
     def run(self):
-        #dep1 = AuditDepartment('团委')
-        #dep2 = AuditDepartment('社会科学教学部')
-        #dep3 = AuditDepartment('教工会')
-        dep1 = AuditDepartment.query.filter_by(name='团委').first()
-        dep2 = AuditDepartment.query.filter_by(name='社会科学教学部').first()
-        dep3 = AuditDepartment.query.filter_by(name='教工会').first()
+        dep1 = AuditDepartment('团委')
+        dep2 = AuditDepartment('社会科学教学部')
+        dep3 = AuditDepartment('教工会')
 
-        cate1 = Classify.query.filter_by(name='广播电视实践项目').first()
-       # cate2 = Classify.query.filter_by(name='教师工作室').first()
-       # cate3 = Classify.query.filter_by(name='社会实践活动').first()
-        cate4 = Classify.query.filter_by(name='竞赛项目').first()
-        #cate1 = Classify("广播电视实践项目")
+        cate1 = Classify("广播电视实践项目")
         cate2 = Classify("教师工作室")
         cate3 = Classify("社会实践活动")
-        #cate4 = Classify("竞赛项目")
+        cate4 = Classify("竞赛项目")
+
+        proj1 = Project("校运动队--训练", "校运动队--训练等等等等等等等等等等等等等等等等等等等等等等等等等等等等", 4, 1)
+        proj1.classify = cate4
+        proj1.audit_departments = [dep1, dep2]
+
+        proj2 = Project("三人篮球--全国大赛", "三人篮球--全国大赛等等等等等等等等等等等等等等等等等等等等等等等等等等等等", 4, 1)
+        proj2.classify = cate4
+        proj2.audit_departments = [dep2, dep3]
+
+        proj3 = Project("乒乓球--全国大赛", "乒乓球--全国大赛工作等等等等等等等等等等等等等等等等等等等等等等等等等等等等", 4, 1)
+        proj3.classify = cate4
+        proj3.audit_departments = [dep1, dep3]
 
         ######################
-        #proj4 = Project("教师工作室", "在教师工作室参与教师工作等等等等等等等等等等等等等等等等等等等等等等等等等等等等", 4, 1)
-        #proj4.classify = cate2
-        #proj4.audit_departments = [dep1, dep2]
+        proj4 = Project("教师工作室", "在教师工作室参与教师工作等等等等等等等等等等等等等等等等等等等等等等等等等等等等", 4, 1)
+        proj4.classify = cate2
+        proj4.audit_departments = [dep1, dep2]
 
-        #proj5 = Project("二级学院社会实践活动", "到二级学院参见社会实践活动表现积极等等等等等等等等等等等等等等等等等等", 4, 1)
-        #proj5.classify = cate2
-        #proj5.audit_departments = [dep2, dep3]
+        proj5 = Project("二级学院社会实践活动", "到二级学院参见社会实践活动表现积极等等等等等等等等等等等等等等等等等等", 4, 1)
+        proj5.classify = cate2
+        proj5.audit_departments = [dep2, dep3]
         #######################
-        #proj6 = Project("境外游学项目", "到国外合作学校游学，其实就是去耍等等花钱等等等等等等", 3, 1)
-        #proj6.classify = cate3
-        #proj6.audit_departments = [dep1, dep2]
-        #db.session.add(proj4)
-        #db.session.add(proj5)
-        #db.session.add(proj6)
+        proj6 = Project("境外游学项目", "到国外合作学校游学，其实就是去耍等等花钱等等等等等等", 3, 1)
+        proj6.classify = cate3
+        proj6.audit_departments = [dep1, dep2]
+
         #db.session.commit()
 
         proj7 = Project("海外课堂", "在网上远程学习，并完成相应学时等等等等等等等等等等等等等等", 5, 1)
@@ -128,6 +131,9 @@ class AddProject(Command):
         proj10.classify = cate1
         proj10.audit_departments = [dep3]
 
+        db.session.add(proj4)
+        db.session.add(proj5)
+        db.session.add(proj6)
         db.session.add(proj7)
         db.session.add(proj8)
         db.session.add(proj9)
