@@ -14,7 +14,7 @@ class ApplyRecord(db.Model):
     audit_credit = db.Column(db.Integer, nullable=True)
     audit_remark = db.Column(db.String(200), nullable=False)
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
-    create_time = db.Column(db.DateTime, nullable=True)
+    audit_time = db.Column(db.DateTime, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     apply_file_id = db.Column(db.Integer, db.ForeignKey('apply_file.id'))
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
