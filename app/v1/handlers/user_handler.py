@@ -70,7 +70,7 @@ class LoginHandler(BaseHandler):
                 session = Session(session_id=new_session_id)
                 session.user = user
                 session.save()
-                return {'sessionid': new_session_id}
+                return {'sessionid': new_session_id, "name": user.name, "role": user.role}
             else:
                 raise HandlerException(respcd=RESP_CODE.USER_NOT_LOGIN, respmsg='密码错误，请重新输入密码')
 
