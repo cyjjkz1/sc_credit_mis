@@ -18,9 +18,10 @@ def create_app(config_name):
     db.init_app(app)
 
     # 配置蓝图
-    from v1.urls import blue_print_user, blue_print_upload
+    from v1.urls import blue_print_user, blue_print_upload, blue_print_project
     app.register_blueprint(blue_print_user)
     app.register_blueprint(blue_print_upload)
+    app.register_blueprint(blue_print_project)
     # 配置日志
     import logging
     from logging.handlers import RotatingFileHandler
