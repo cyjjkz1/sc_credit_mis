@@ -23,7 +23,7 @@ class College(db.Model):
         col_dict = {
             'id': self.id,
             'name': self.name,
-            'create_time': self.create_time
+            'create_time': self.create_time.strftime("%Y-%m-%d %H:%M:%S %f"),
         }
         if rel_query:
             all_major = []
@@ -52,7 +52,7 @@ class Major(db.Model):
         maj_dict = {
             'id': self.id,
             'name': self.name,
-            'create_time': self.create_time
+            'create_time': self.create_time.strftime("%Y-%m-%d %H:%M:%S %f"),
         }
         return maj_dict
 
@@ -72,7 +72,7 @@ class Classify(db.Model):
         class_dict = {
             'id': self.id,
             'name': self.name,
-            'create_time': self.create_time
+            'create_time': self.create_time.strftime("%Y-%m-%d %H:%M:%S %f"),
         }
         temp_projects = []
         if self.projects is not None:
@@ -109,7 +109,7 @@ class AuditDepartment(db.Model):
         dep_dict = {
             'id': self.id,
             'name': self.name,
-            'create_time': self.create_time
+            'create_time': self.create_time.strftime("%Y-%m-%d %H:%M:%S %f"),
         }
         if rel_query:
             all_project = []
@@ -146,7 +146,7 @@ class Project(db.Model):
             'detail': self.detail,
             'max_credit': self.max_credit,
             'min_credit': self.min_credit,
-            'create_time': self.create_time
+            'create_time': self.create_time.strftime("%Y-%m-%d %H:%M:%S %f"),
         }
         all_department = []
         if self.audit_departments is not None:

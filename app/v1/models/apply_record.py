@@ -40,7 +40,7 @@ class ApplyRecord(db.Model):
         self.create_time = create_time
 
     def to_dict(self, rel_query=False):
-        red_dict = {
+        apply_dict = {
             "userid": self.id,
             "apply_year": self.apply_year,
             "apply_term": self.apply_term,
@@ -49,17 +49,19 @@ class ApplyRecord(db.Model):
             "apply_remark": self.apply_remark,
             "audit_credit": self.apply_credit,
             "audit_remark": self.audit_remark,
-            "create_time": self.create_time
+            "create_time": self.create_time.strftime("%Y-%m-%d %H:%M:%S %f")
         }
+        if self.audit_time:
+            apply_dict = self.audit_time.strftime("%Y-%m-%d %H:%M:%S %f")
         if rel_query:
             if self.r_user:
-                red_dict['name'] = self.r_user.name
+                apply_dict['name'] = self.r_user.name
             if self.apply_file:
-                red_dict['apply_file'] = self.apply_file.name
+                apply_dict['apply_file'] = self.apply_file.name
             if self.project:
-                red_dict['project_name'] = self.project.name
+                apply_dict['project_name'] = self.project.name
 
-        return red_dict
+        return apply_dict
 
 
 class ApplyFile(db.Model):
@@ -77,7 +79,7 @@ class ApplyFile(db.Model):
         col_dict = {
             'id': self.id,
             'name': self.name,
-            'create_time': self.create_time
+            'create_time': self.create_time.strftime("%Y-%m-%d %H:%M:%S %f"),
         }
         return col_dict
 
