@@ -19,7 +19,7 @@ class Session(db.Model):
         self.expire = expire
         self.create_time = create_time
 
-    def to_json(self):
+    def to_dict(self):
         cookie_dict = {
             'sessionid': self.session_id,
             'expire': self.expire,
@@ -71,7 +71,7 @@ class User(db.Model):
         self.class_name = class_name
         self.create_time = create_time
 
-    def to_json(self):
+    def to_dict(self):
         user_dict={}
         if self.role == 1:
             # 老师

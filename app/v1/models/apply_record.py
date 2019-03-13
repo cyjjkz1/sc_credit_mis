@@ -41,6 +41,7 @@ class ApplyRecord(db.Model):
 
     def to_dict(self, rel_query=False):
         red_dict = {
+            "userid": self.id,
             "apply_year": self.apply_year,
             "apply_term": self.apply_term,
             "apply_credit": self.apply_credit,

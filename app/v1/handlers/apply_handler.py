@@ -48,7 +48,7 @@ class ApplyHandler(BaseHandler):
                 password = params['password']
                 md5_pwd = self.md5(password)
                 user = User.query.filter_by(account=params['account']).first()
-                app.logger.info('user query | user info = {}'.format(user.to_json()))
+                app.logger.info('user query | user info = {}'.format(user.to_dict()))
 
                 if user.password == md5_pwd:
                     if str(user.role) != str(params['role']):

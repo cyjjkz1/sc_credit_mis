@@ -5,6 +5,8 @@ from flask import Blueprint
 from flask_restful import Api
 from handlers.user_handler import UserHandler, LoginHandler, LogoutHandler, ChangePasswordHandler
 from handlers.upload_handler import UploadFileHandler, DownloadHandle
+from handlers.project_handler import ProjectHandler
+
 
 blue_print_user = Blueprint('blue_print_user', __name__, url_prefix='/credit/v1/api/user')
 user_api = Api(blue_print_user)
@@ -17,6 +19,10 @@ blue_print_upload = Blueprint('blue_print_upload', __name__, url_prefix='/credit
 upload_api = Api(blue_print_upload)
 upload_api.add_resource(UploadFileHandler, '/upload')
 upload_api.add_resource(DownloadHandle, '/download/<filename>')
+
+blue_print_project = Blueprint('blue_print_project', __name__, url_prefix='/credit/v1/api/project')
+project_api = Api(blue_print_project)
+project_api.add_resource(ProjectHandler, '/query')
 
 #user_api.add_resource('', '/logout')
 #user_api.add_resource('', '/forget')

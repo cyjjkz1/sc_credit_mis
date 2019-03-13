@@ -48,7 +48,7 @@ class Major(db.Model):
         self.name = name
         self.create_time = create_time
 
-    def to_json(self):
+    def to_dict(self):
         maj_dict = {
             'id': self.id,
             'name': self.name,
@@ -68,13 +68,18 @@ class Classify(db.Model):
         self.name = name
         self.create_time = create_time
 
-    def to_json(self):
-        cate_dict = {
+    def to_dict(self):
+        class_dict = {
             'id': self.id,
             'name': self.name,
             'create_time': self.create_time
         }
-        return cate_dict
+        temp_projects = []
+        if self.projects is not None:
+            for proj in self.projects:
+                temp_projects.append(proj.to_dict())
+        class_dict['projects'] = temp_projects
+        return class_dict
 
 
 audit_project = db.Table('audit_project',
@@ -100,7 +105,7 @@ class AuditDepartment(db.Model):
         self.name = name
         self.create_time = create_time
 
-    def to_json(self, rel_query=False):
+    def to_dict(self, rel_query=False):
         dep_dict = {
             'id': self.id,
             'name': self.name,
@@ -134,7 +139,7 @@ class Project(db.Model):
         self.min_credit = min_credit
         self.create_time = create_time
 
-    def to_json(self, rel_query=False):
+    def to_dict(self,):
         pro_dict = {
             'id': self.id,
             'name': self.name,
@@ -143,11 +148,10 @@ class Project(db.Model):
             'min_credit': self.min_credit,
             'create_time': self.create_time
         }
-        if rel_query:
-            all_department = []
-            if self.audit_departments is not None:
-                for dep in self.audit_departments:
-                    all_department.append(dep.to_dict())
-            pro_dict['audit_departments'] = all_department
+        all_department = []
+        if self.audit_departments is not None:
+            for dep in self.audit_departments:
+                all_department.append(dep.to_dict())
+        pro_dict['audit_departments'] = all_department
         return pro_dict
 
