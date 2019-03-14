@@ -19,12 +19,12 @@ POST_detail = RequiredField('apply_detail', converter=converter.TypeConverter(st
 POST_apply_remark = RequiredField('apply_remark',
                                   converter=converter.TypeConverter(str),
                                   checker=LenChecker(max_len=200, min_len=0))
-POST_user_id = RequiredField('user_id', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,}'))
-POST_file_id = RequiredField('apply_file_id', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,}'))
-POST_project_id = RequiredField('project_id', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,}'))
+POST_user_id = RequiredField('user_id', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,100}'))
+POST_file_id = RequiredField('apply_file_id', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,100}'))
+POST_project_id = RequiredField('project_id', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,100}'))
 POST_audit_department_id = RequiredField('audit_department_id',
                                          converter=converter.TypeConverter(str),
-                                         checker=ReChecker(r'[0-9]{1,}'))
+                                         checker=ReChecker(r'[0-9]{1,100}'))
 
 
 class ApplyHandler(BaseHandler):
