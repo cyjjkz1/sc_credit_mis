@@ -95,7 +95,8 @@ class RecordListHandler(BaseHandler):
     )]
 
     def get(self):
-        pass
+        get_ret = self.handle()
+        return jsonify(get_ret)
 
     @with_credit_user
     def _handle(self, *args, **kwargs):
