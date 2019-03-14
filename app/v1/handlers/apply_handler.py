@@ -11,19 +11,20 @@ from data_packer.checker import (
 )
 from app import db
 from ..constant import RESP_CODE
-POST_year = RequiredField('apply_year', checker=ReChecker(r'[0-9~]{1,20}'))
-POST_credit = RequiredField('apply_credit', checker=ReChecker(r'[0-9]{1}'))
-POST_term = RequiredField('apply_term', checker=ReChecker(r'[12]{1}'))
-POST_detail = RequiredField('apply_detail',
+POST_year = RequiredField('apply_year', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9~]{1,20}'))
+POST_credit = RequiredField('apply_credit', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1}'))
+POST_term = RequiredField('apply_term', converter=converter.TypeConverter(str), checker=ReChecker(r'[12]{1}'))
+POST_detail = RequiredField('apply_detail', converter=converter.TypeConverter(str),
                             checker=LenChecker(max_len=200, min_len=20))
 POST_apply_remark = RequiredField('apply_remark',
+                                  converter=converter.TypeConverter(str),
                                   checker=LenChecker(max_len=200, min_len=0))
-POST_user_id = RequiredField('user_id', checker=ReChecker(r'[0-9]{1,100}'))
-POST_file_id = RequiredField('apply_file_id', checker=ReChecker(r'[0-9]{1,100}'))
-POST_project_id = RequiredField('project_id', checker=ReChecker(r'[0-9]{1,100}'))
+POST_user_id = RequiredField('user_id', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,}'))
+POST_file_id = RequiredField('apply_file_id', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,}'))
+POST_project_id = RequiredField('project_id', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,}'))
 POST_audit_department_id = RequiredField('audit_department_id',
                                          converter=converter.TypeConverter(str),
-                                         checker=ReChecker(r'[0-9]{1,100}'))
+                                         checker=ReChecker(r'[0-9]{1,}'))
 
 
 class ApplyHandler(BaseHandler):
@@ -54,7 +55,8 @@ class ApplyHandler(BaseHandler):
 
         try:
             user = self.credit_user
-            if user.id == params['user_id']:
+            userid = str(user.id)
+            if userid == params['user_id']:
                 record = ApplyRecord(params['apply_year'],
                                      params['apply_term'],
                                      params['apply_credit'],
