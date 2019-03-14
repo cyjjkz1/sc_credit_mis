@@ -13,7 +13,7 @@ from app import db
 from ..constant import RESP_CODE
 POST_year = RequiredField('apply_year', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9~]{1,20}'))
 POST_credit = RequiredField('apply_credit', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1}'))
-POST_term = RequiredField('apply_term', converter=converter.TypeConverter(str), checker=LenChecker(r'[12]{1}'))
+POST_term = RequiredField('apply_term', converter=converter.TypeConverter(str), checker=ReChecker(r'[12]{1}'))
 POST_detail = RequiredField('apply_detail', converter=converter.TypeConverter(str),
                             checker=LenChecker(max_len=200, min_len=20))
 POST_apply_remark = RequiredField('apply_remark',
