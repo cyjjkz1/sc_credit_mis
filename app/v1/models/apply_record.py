@@ -15,9 +15,11 @@ class ApplyRecord(db.Model):
     audit_remark = db.Column(db.String(200), nullable=False)
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
     audit_time = db.Column(db.DateTime, nullable=True)
+
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     apply_file_id = db.Column(db.Integer, db.ForeignKey('apply_file.id'))
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
+    audit_department_id = db.Column(db.Integer, db.ForeignKey('audit_department.id'))
 
     def __init__(self,
                  apply_year,
@@ -28,6 +30,7 @@ class ApplyRecord(db.Model):
                  user_id,
                  apply_file_id,
                  project_id,
+                 audit_department_id,
                  create_time=datetime.now()):
         self.apply_year = apply_year
         self.apply_term = apply_term
@@ -37,6 +40,7 @@ class ApplyRecord(db.Model):
         self.user_id = user_id
         self.apply_file_id = apply_file_id
         self.project_id = project_id
+        self.audit_department_id = audit_department_id
         self.create_time = create_time
 
     def to_dict(self, rel_query=False):
@@ -63,6 +67,11 @@ class ApplyRecord(db.Model):
 
         return apply_dict
 
+    def save(self):
+        db.session.add(self)
+        db.session.flush()
+        db.session.commit()
+
 
 class ApplyFile(db.Model):
     __tablename__ = 'apply_file'
@@ -85,5 +94,6 @@ class ApplyFile(db.Model):
 
     def save(self):
         db.session.add(self)
+        db.session.flush()
         db.session.commit()
 
