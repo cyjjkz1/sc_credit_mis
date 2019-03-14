@@ -12,7 +12,7 @@ class ApplyRecord(db.Model):
     apply_remark = db.Column(db.String(200), nullable=False)
 
     audit_credit = db.Column(db.Integer, nullable=True)
-    audit_remark = db.Column(db.String(200), nullable=False)
+    audit_remark = db.Column(db.String(200), nullable=True)
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
     audit_time = db.Column(db.DateTime, nullable=True)
 
