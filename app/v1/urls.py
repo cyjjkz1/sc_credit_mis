@@ -24,7 +24,7 @@ blue_print_project = Blueprint('blue_print_project', __name__, url_prefix='/cred
 project_api = Api(blue_print_project)
 project_api.add_resource(ProjectHandler, '/query')
 
-blue_print_apply = Blueprint('blue_print_project', __name__, url_prefix='/credit/v1/api/apply')
+blue_print_apply = Blueprint('blue_print_apply', __name__, url_prefix='/credit/v1/api/apply')
 apply_api = Api(blue_print_apply)
 apply_api.add_resource(ApplyHandler, '/submit')
 
