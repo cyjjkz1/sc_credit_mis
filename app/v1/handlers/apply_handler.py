@@ -68,6 +68,7 @@ class ApplyHandler(BaseHandler):
                                      params['audit_department_id']
                                      )
                 record.save()
+                return {'recod_id': str(record.id)}
             else:
                 raise HandlerException(respcd=RESP_CODE.USER_NOT_LOGIN, respmsg='用户身份有误, 请重新登录')
         except BaseException as e:
