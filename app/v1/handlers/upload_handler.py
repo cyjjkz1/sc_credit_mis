@@ -56,7 +56,7 @@ class UploadFileHandler(BaseHandler):
                     apply_file = ApplyFile(filename)
                     apply_file.save()
                     app.logger.debug('%s save successfully' % filename)
-                    return {'id': apply_file, 'filename': filename}
+                    return {'id': apply_file.id, 'filename': filename}
                 else:
                     app.logger.debug('%s not allowed' % file.filename)
                     raise HandlerException(respcd=RESP_CODE.PARAM_ERROR, respmsg='上传文件格式错误')
