@@ -102,6 +102,7 @@ class RecordListHandler(BaseHandler):
     def _handle(self, *args, **kwargs):
         params = self.parse_request_params()
         app.logger.info('func=parse_request_params | parse_type={} | parse_params = {}'.format(type(params), params))
+        params['user_id'] = self.credit_user.id
         try:
             records = ApplyRecord.query.filter_by(**params).all()
             temp_re_list = []
