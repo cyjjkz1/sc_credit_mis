@@ -66,7 +66,7 @@ class ApplyRecord(db.Model):
             if self.r_user:
                 apply_dict['name'] = self.r_user.name
             if self.apply_file:
-                apply_dict['apply_file'] = self.apply_file.name
+                apply_dict['apply_file'] = self.apply_file.filename
             if self.project:
                 apply_dict['project_name'] = self.project.name
                 if self.project.classify:
