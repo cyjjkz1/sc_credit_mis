@@ -58,10 +58,10 @@ class ApplyRecord(db.Model):
             "audit_credit": self.audit_credit,
             "audit_remark": self.audit_remark,
             "audit_status": self.audit_status,
-            "create_time": self.create_time.strftime("%Y-%m-%d %H:%M:%S %f")
+            "create_time": self.create_time.strftime("%Y-%m-%d %H:%M:%S")
         }
         if self.audit_time:
-            apply_dict = self.audit_time.strftime("%Y-%m-%d %H:%M:%S %f")
+            apply_dict = self.audit_time.strftime("%Y-%m-%d %H:%M:%S")
         if rel_query:
             if self.r_user:
                 apply_dict['name'] = self.r_user.name
