@@ -5,7 +5,7 @@ from ..models.apply_record import ApplyRecord
 from flask import current_app as app
 from flask import jsonify, make_response
 from base_handler import with_credit_user, BaseHandler, HandlerException
-from data_packer import RequiredField, converter
+from data_packer import RequiredField, OptionalField, converter, SelectorField
 from data_packer.checker import (
     ReChecker, LenChecker
 )
@@ -26,6 +26,18 @@ POST_audit_department_id = RequiredField('audit_department_id',
                                          converter=converter.TypeConverter(str),
                                          checker=ReChecker(r'[0-9]{1,}'))
 
+OPTION_year = OptionalField(src_name='apply_year',
+                            converter=converter.TypeConverter(str),
+                            checker=ReChecker(r'[0-9~]{1,20}'))
+
+OPTION_term = OptionalField(src_name='apply_term',
+                            converter=converter.TypeConverter(str),
+                            checker=ReChecker(r'[12]{1}'))
+
+OPTION_status = OptionalField(src_name='audit_status',
+                              converter=converter.TypeConverter(str),
+                              checker=ReChecker(r'[01]{1}'))
+
 
 class ApplyHandler(BaseHandler):
     POST_FIELDS = [
@@ -36,9 +48,6 @@ class ApplyHandler(BaseHandler):
     ]
 
     session_id = None
-
-    def get(self):
-        pass
 
     def post(self):
         ret = self.handle()
@@ -71,6 +80,35 @@ class ApplyHandler(BaseHandler):
                 return {'recod_id': str(record.id)}
             else:
                 raise HandlerException(respcd=RESP_CODE.USER_NOT_LOGIN, respmsg='用户身份有误, 请重新登录')
+        except BaseException as e:
+            db.session.rollback()
+            raise e
+
+
+class RecordListHandler(BaseHandler):
+    GET_FIELDS = [SelectorField(
+        fields=[
+            OPTION_year,
+            OPTION_term,
+            OPTION_status
+        ],
+        at_least=1,
+    )]
+
+    def get(self):
+        pass
+
+    @with_credit_user
+    def _handle(self, *args, **kwargs):
+        params = self.parse_request_params()
+        app.logger.info('func=parse_request_params | parse_type={} | parse_params = {}'.format(type(params), params))
+        try:
+            records = ApplyRecord.query.filter_by(**params).all()
+            temp_re_list = []
+            if records:
+                for record in records:
+                    temp_re_list.append(record.to_dict())
+            return temp_re_list
         except BaseException as e:
             db.session.rollback()
             raise e
