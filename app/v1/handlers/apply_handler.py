@@ -107,7 +107,7 @@ class RecordListHandler(BaseHandler):
             temp_re_list = []
             if records:
                 for record in records:
-                    temp_re_list.append(record.to_dict())
+                    temp_re_list.append(record.to_dict(rel_query=True))
             return temp_re_list
         except BaseException as e:
             db.session.rollback()

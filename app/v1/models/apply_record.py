@@ -55,7 +55,7 @@ class ApplyRecord(db.Model):
             "apply_credit": self.apply_credit,
             "apply_detail": self.apply_detail,
             "apply_remark": self.apply_remark,
-            "audit_credit": self.apply_credit,
+            "audit_credit": self.audit_credit,
             "audit_remark": self.audit_remark,
             "audit_status": self.audit_status,
             "create_time": self.create_time.strftime("%Y-%m-%d %H:%M:%S %f")
