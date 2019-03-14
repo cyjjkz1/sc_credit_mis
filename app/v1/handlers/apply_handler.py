@@ -137,7 +137,7 @@ class DepartmentRecordsHandler(BaseHandler):
     def _handle(self, *args, **kwargs):
         try:
             user = self.credit_user
-            department = user.apply_audit_department
+            department = user.audit_department
             records = department.records
             temp_re_list = []
             if records:
