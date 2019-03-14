@@ -91,8 +91,7 @@ class RecordListHandler(BaseHandler):
             OPTION_year,
             OPTION_term,
             OPTION_status
-        ],
-        at_least=1,
+        ]
     )]
 
     def get(self):
