@@ -133,6 +133,7 @@ class DepartmentRecordsHandler(BaseHandler):
         get_ret = self.handle()
         return jsonify(get_ret)
 
+    @with_credit_user
     def _handle(self, *args, **kwargs):
         try:
             user = self.credit_user
