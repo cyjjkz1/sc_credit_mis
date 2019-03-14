@@ -26,8 +26,8 @@ project_api.add_resource(ProjectHandler, '/query')
 
 blue_print_apply = Blueprint('blue_print_apply', __name__, url_prefix='/credit/v1/api/apply')
 apply_api = Api(blue_print_apply)
-apply_api.add_resource(ApplyHandler, '/submit')
-apply_api.add_resource(ApplyHandler, '/info')
+apply_api.add_resource(ApplyHandler, '/submit', endpoint='supply_submit')
+apply_api.add_resource(ApplyHandler, '/info', endpoint='supply_info')
 apply_api.add_resource(RecordListHandler, '/list')
 apply_api.add_resource(DepartmentRecordsHandler, '/department/list')
 
