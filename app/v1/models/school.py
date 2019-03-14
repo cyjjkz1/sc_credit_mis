@@ -23,7 +23,7 @@ class College(db.Model):
         col_dict = {
             'id': self.id,
             'name': self.name,
-            'create_time': self.create_time
+            'create_time': self.create_time.strftime("%Y-%m-%d %H:%M:%S %f"),
         }
         if rel_query:
             all_major = []
@@ -48,11 +48,11 @@ class Major(db.Model):
         self.name = name
         self.create_time = create_time
 
-    def to_json(self):
+    def to_dict(self):
         maj_dict = {
             'id': self.id,
             'name': self.name,
-            'create_time': self.create_time
+            'create_time': self.create_time.strftime("%Y-%m-%d %H:%M:%S %f"),
         }
         return maj_dict
 
@@ -68,13 +68,18 @@ class Classify(db.Model):
         self.name = name
         self.create_time = create_time
 
-    def to_json(self):
-        cate_dict = {
+    def to_dict(self):
+        class_dict = {
             'id': self.id,
             'name': self.name,
-            'create_time': self.create_time
+            'create_time': self.create_time.strftime("%Y-%m-%d %H:%M:%S %f"),
         }
-        return cate_dict
+        temp_projects = []
+        if self.projects is not None:
+            for proj in self.projects:
+                temp_projects.append(proj.to_dict())
+        class_dict['projects'] = temp_projects
+        return class_dict
 
 
 audit_project = db.Table('audit_project',
@@ -95,16 +100,17 @@ class AuditDepartment(db.Model):
                                   lazy='dynamic')
 
     users = db.relationship('User', backref='audit_department', lazy='dynamic')
+    records = db.relationship('ApplyRecord', backref='apply_audit_department', lazy='dynamic')
 
     def __init__(self, name, create_time=datetime.now()):
         self.name = name
         self.create_time = create_time
 
-    def to_json(self, rel_query=False):
+    def to_dict(self, rel_query=False):
         dep_dict = {
             'id': self.id,
             'name': self.name,
-            'create_time': self.create_time
+            'create_time': self.create_time.strftime("%Y-%m-%d %H:%M:%S %f"),
         }
         if rel_query:
             all_project = []
@@ -134,20 +140,19 @@ class Project(db.Model):
         self.min_credit = min_credit
         self.create_time = create_time
 
-    def to_json(self, rel_query=False):
+    def to_dict(self,):
         pro_dict = {
             'id': self.id,
             'name': self.name,
             'detail': self.detail,
             'max_credit': self.max_credit,
             'min_credit': self.min_credit,
-            'create_time': self.create_time
+            'create_time': self.create_time.strftime("%Y-%m-%d %H:%M:%S %f"),
         }
-        if rel_query:
-            all_department = []
-            if self.audit_departments is not None:
-                for dep in self.audit_departments:
-                    all_department.append(dep.to_dict())
-            pro_dict['audit_departments'] = all_department
+        all_department = []
+        if self.audit_departments is not None:
+            for dep in self.audit_departments:
+                all_department.append(dep.to_dict())
+        pro_dict['audit_departments'] = all_department
         return pro_dict
 

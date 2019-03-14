@@ -19,11 +19,11 @@ class Session(db.Model):
         self.expire = expire
         self.create_time = create_time
 
-    def to_json(self):
+    def to_dict(self):
         cookie_dict = {
             'sessionid': self.session_id,
             'expire': self.expire,
-            'create_time': self.create_time
+            'create_time': self.create_time.strftime("%Y-%m-%d %H:%M:%S %f")
         }
         return cookie_dict
 
@@ -71,29 +71,21 @@ class User(db.Model):
         self.class_name = class_name
         self.create_time = create_time
 
-    def to_json(self):
-        user_dict={}
+    def to_dict(self):
+        user_dict = {
+            "id": self.id,
+            "name": self.name,
+            "account": self.account,
+            "role": self.role,
+            "create_time": self.create_time.strftime("%Y-%m-%d %H:%M:%S %f"),
+        }
         if self.role == 1:
             # 老师
-            user_dict = {
-                "id": self.id,
-                "name": self.name,
-                "account": self.account,
-                "role": self.role,
-                "create_time": self.create_time,
-            }
             if self.audit_department:
                 user_dict["department"] = self.audit_department.name
         elif self.role == 2:
             # 学生
-            user_dict = {
-                "id": self.id,
-                "name": self.name,
-                "account": self.account,
-                "role": self.role,
-                "class_name": self.class_name,
-                "create_time": self.create_time,
-            }
+            user_dict['class_name'] = self.class_name
             if self.college:
                 user_dict['college'] = self.college.name
             if self.major:

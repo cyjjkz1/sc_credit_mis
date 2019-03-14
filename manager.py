@@ -25,6 +25,7 @@ class CreateDB(Command):
         #user = models.user.User.query.filter_by(account="13500001111").first()
         #print user.session.first().session_id
 
+
 # 自定义命令
 manager.add_command('createdb', CreateDB)
 manager.add_command('runserver', Server(host='0.0.0.0', port=9066))

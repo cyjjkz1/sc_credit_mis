@@ -28,7 +28,7 @@ class UserHandler(BaseHandler):
             user = self.credit_user
             if user is None:
                 raise HandlerException(respcd=RESP_CODE.USER_NOT_LOGIN, respmsg=RESP_ERR_MSG.get(RESP_CODE.USER_NOT_LOGIN))
-            return user.to_json()
+            return user.to_dict()
         except BaseException as e:
             db.session.rollback()
             raise e
@@ -55,7 +55,7 @@ class LoginHandler(BaseHandler):
             password = params['password']
             md5_pwd = self.md5(password)
             user = User.query.filter_by(account=params['account']).first()
-            app.logger.info('user query | user info = {}'.format(user.to_json()))
+            app.logger.info('user query | user info = {}'.format(user.to_dict()))
 
             if user.password == md5_pwd:
                 if str(user.role) != str(params['role']):
@@ -70,7 +70,7 @@ class LoginHandler(BaseHandler):
                 session = Session(session_id=new_session_id)
                 session.user = user
                 session.save()
-                return {'sessionid': new_session_id}
+                return {'sessionid': new_session_id, 'user_id': user.id, "name": user.name, "role": user.role}
             else:
                 raise HandlerException(respcd=RESP_CODE.USER_NOT_LOGIN, respmsg='密码错误，请重新输入密码')
 
