@@ -7,18 +7,18 @@ from flask import jsonify, make_response
 from base_handler import with_credit_user, BaseHandler, HandlerException
 from data_packer import RequiredField, converter
 from data_packer.checker import (
-    ReChecker
+    ReChecker, LenChecker
 )
 from app import db
-from ..constant import RESP_CODE, RESP_ERR_MSG
+from ..constant import RESP_CODE
 POST_year = RequiredField('apply_year', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9~]{1,20}'))
 POST_credit = RequiredField('apply_credit', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1}'))
-POST_term = RequiredField('apply_term', converter=converter.TypeConverter(str), checker=ReChecker(r'[12]{1}'))
+POST_term = RequiredField('apply_term', converter=converter.TypeConverter(str), checker=LenChecker(r'[12]{1}'))
 POST_detail = RequiredField('apply_detail', converter=converter.TypeConverter(str),
-                            checker=ReChecker(r'[\\d\\D]{10,200}'))
+                            checker=LenChecker(max_len=200, min_len=20))
 POST_apply_remark = RequiredField('apply_remark',
                                   converter=converter.TypeConverter(str),
-                                  checker=ReChecker(r'[\\d\\D]{10,200}'))
+                                  checker=LenChecker(max_len=200, min_len=0))
 POST_user_id = RequiredField('user_id', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,}'))
 POST_file_id = RequiredField('apply_file_id', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,}'))
 POST_project_id = RequiredField('project_id', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,}'))
