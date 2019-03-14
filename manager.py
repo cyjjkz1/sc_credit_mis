@@ -27,7 +27,7 @@ class CreateDB(Command):
 
 # 自定义命令
 manager.add_command('createdb', CreateDB)
-manager.add_command('runserver', Server(host='0.0.0.0', port=9090))
+manager.add_command('runserver', Server(host='0.0.0.0', port=9066))
 manager.add_command('db', MigrateCommand)
 manager.add_command('addcol', AddCollege)
 manager.add_command('delcol', DeleteCol)
