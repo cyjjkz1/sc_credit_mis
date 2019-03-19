@@ -63,7 +63,7 @@ class LoginHandler(BaseHandler):
 
                 # 密码正确，可以打cookie
                 origin_session = user.session.first()
-                app.logger.info('db query origin session = %s'.format(origin_session))
+                app.logger.info('db query origin session = {}'.format(origin_session))
                 if origin_session is not None:
                     db.session.delete(origin_session)
                     db.session.commit()
@@ -72,7 +72,7 @@ class LoginHandler(BaseHandler):
                 session = Session(session_id=new_session_id)
                 session.user = user
                 session.save()
-                app.logger.info('db crete new session = %s'.format(session.to_dict()))
+                app.logger.info('db crete new session = {}'.format(session.to_dict()))
                 return {'sessionid': new_session_id, 'user_id': user.id, "name": user.name, "role": user.role}
             else:
                 raise HandlerException(respcd=RESP_CODE.USER_NOT_LOGIN, respmsg='密码错误，请重新输入密码')
