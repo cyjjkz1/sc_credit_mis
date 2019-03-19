@@ -72,6 +72,7 @@ class LoginHandler(BaseHandler):
                 session = Session(session_id=new_session_id)
                 session.user = user
                 session.save()
+                app.logger.info('db crete new session = %s'.format(session.to_dict()))
                 return {'sessionid': new_session_id, 'user_id': user.id, "name": user.name, "role": user.role}
             else:
                 raise HandlerException(respcd=RESP_CODE.USER_NOT_LOGIN, respmsg='密码错误，请重新输入密码')
