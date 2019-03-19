@@ -45,11 +45,12 @@ class ApplyRecord(db.Model):
         self.project_id = project_id
         self.audit_department_id = audit_department_id
         self.audit_status = audit_status
-        self.audit_credit = 0
+        self.audit_credit = audit_credit
         self.create_time = create_time
 
     def to_dict(self, rel_query=False):
         apply_dict = {
+            "id": self.id,
             "apply_year": self.apply_year,
             "apply_term": self.apply_term,
             "apply_credit": self.apply_credit,

@@ -62,14 +62,17 @@ class LoginHandler(BaseHandler):
                     raise HandlerException(respcd=RESP_CODE.USER_NOT_LOGIN, respmsg='用户角色错误')
 
                 # 密码正确，可以打cookie
-                if user.session.first() is not None:
-                    db.session.delete(user.session.first())
+                origin_session = user.session.first()
+                app.logger.info('db query origin session = {}'.format(origin_session))
+                if origin_session is not None:
+                    db.session.delete(origin_session)
                     db.session.commit()
                 new_session_id = self.create_session_id()
                 self.session_id = new_session_id
                 session = Session(session_id=new_session_id)
                 session.user = user
                 session.save()
+                app.logger.info('db crete new session = {}'.format(session.to_dict()))
                 return {'sessionid': new_session_id, 'user_id': user.id, "name": user.name, "role": user.role}
             else:
                 raise HandlerException(respcd=RESP_CODE.USER_NOT_LOGIN, respmsg='密码错误，请重新输入密码')
