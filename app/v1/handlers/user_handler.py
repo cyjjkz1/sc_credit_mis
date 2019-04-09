@@ -62,7 +62,7 @@ class LoginHandler(BaseHandler):
                     raise HandlerException(respcd=RESP_CODE.USER_NOT_LOGIN, respmsg='用户角色错误')
 
                 # 密码正确，可以打cookie
-                origin_session = user.session.first()
+                origin_session = user.session
                 app.logger.info('db query origin session = {}'.format(origin_session.to_dict()))
                 if origin_session is not None:
                     db.session.delete(origin_session)
