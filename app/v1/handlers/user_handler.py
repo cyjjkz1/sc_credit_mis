@@ -63,8 +63,8 @@ class LoginHandler(BaseHandler):
 
                 # 密码正确，可以打cookie
                 origin_session = user.session
-                app.logger.info('db query origin session = {}'.format(origin_session.to_dict()))
                 if origin_session is not None:
+                    app.logger.info('db query origin session = {}'.format(origin_session.to_dict()))
                     db.session.delete(origin_session)
                     db.session.commit()
                 new_session_id = self.create_session_id()
