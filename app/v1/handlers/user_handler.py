@@ -92,9 +92,9 @@ class LogoutHandler(BaseHandler):
         try:
             user = self.credit_user
             app.logger.info("account = {} 退出登陆".format(user.account))
-            session = user.session.first()
-            app.logger.info("delete session = {}".format(session.session_id))
-            db.session.delete(session)
+            session_record = user.session
+            app.logger.info("delete session = {}".format(session_record.session_id))
+            db.session.delete(session_record)
             db.session.commit()
             return {'account': user.account}
         except BaseException as e:
