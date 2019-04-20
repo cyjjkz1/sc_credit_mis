@@ -31,6 +31,8 @@ apply_api.add_resource(ApplyHandler, '/info', endpoint='supply_info')
 apply_api.add_resource(RecordListHandler, '/list')
 apply_api.add_resource(DepartmentRecordsHandler, '/department/list')
 
+
+
 #user_api.add_resource('', '/logout')
 #user_api.add_resource('', '/forget')
 #
