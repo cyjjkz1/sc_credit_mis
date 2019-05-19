@@ -24,6 +24,7 @@ def create_app(config_name):
     app.register_blueprint(blue_print_upload)
     app.register_blueprint(blue_print_project)
     app.register_blueprint(blue_print_apply)
+    # app.register_blueprint(blue_print_audit)
     # 配置日志
     import logging
     from logging.handlers import RotatingFileHandler
