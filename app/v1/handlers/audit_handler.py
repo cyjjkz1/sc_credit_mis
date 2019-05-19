@@ -49,6 +49,7 @@ class AuditHandler(BaseHandler):
                     record = ApplyRecord.query.filter(ApplyRecord.id == apply_record_id).first()
                     record.audit_credit = audit_credit
                     record.audit_remark = audit_remark
+                    record.audit_status = '1'
                     record.save()
                     return {'recod_id': str(record.id), 'audit_credit': audit_remark}
                 else:
