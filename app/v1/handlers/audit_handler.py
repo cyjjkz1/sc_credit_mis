@@ -49,9 +49,9 @@ class AuditHandler(BaseHandler):
                     record = ApplyRecord.query.filter(ApplyRecord.id == apply_record_id).first()
                     record.audit_credit = audit_credit
                     record.audit_remark = audit_remark
-                    record.audit_status = '1'
+                    record.audit_status = '1'  # 修改审核状态为已经审核
                     record.save()
-                    return {'recod_id': str(record.id), 'audit_credit': audit_remark}
+                    return {'record_id': str(record.id), 'audit_credit': audit_credit}
                 else:
                     raise HandlerException(respcd=RESP_CODE.USER_NOT_LOGIN, respmsg='用户身份有误, 请重新登录')
         except BaseException as e:
