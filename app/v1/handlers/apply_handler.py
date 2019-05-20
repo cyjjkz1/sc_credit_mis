@@ -129,12 +129,20 @@ class RecordListHandler(BaseHandler):
 
 
 class DepartmentRecordsHandler(BaseHandler):
+    GET_FIELDS = [SelectorField(
+        fields=[
+            OPTION_status
+        ]
+    )]
+
     def get(self):
         get_ret = self.handle()
         return jsonify(get_ret)
 
     @with_credit_user
     def _handle(self, *args, **kwargs):
+        params = self.parse_request_params()
+        app.logger.info('func=parse_request_params | parse_type={} | parse_params = {}'.format(type(params), params))
         try:
             user = self.credit_user
             department = user.audit_department
@@ -143,6 +151,8 @@ class DepartmentRecordsHandler(BaseHandler):
             if records:
                 for record in records:
                     if str(record.audit_status) == "0":  # 只返回没有审核的
+                        temp_re_list.append(record.to_dict(rel_query=True))
+                    else:
                         temp_re_list.append(record.to_dict(rel_query=True))
             return temp_re_list
         except BaseException as e:
