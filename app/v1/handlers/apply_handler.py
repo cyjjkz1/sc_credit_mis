@@ -192,22 +192,6 @@ class DepartmentAllRecordsHandler(BaseHandler):
             db.session.rollback()
             raise e
 
-    @with_credit_user
-    def _handle(self, *args, **kwargs):
-        params = self.parse_request_params()
-        app.logger.info('func=parse_request_params | parse_type={} | parse_params = {}'.format(type(params), params))
-        params['user_id'] = self.credit_user.id
-        try:
-            records = ApplyRecord.query.filter_by(**params).all()
-            temp_re_list = []
-            if records:
-                for record in records:
-                    temp_re_list.append(record.to_dict(rel_query=True))
-            return temp_re_list
-        except BaseException as e:
-            db.session.rollback()
-            raise e
-
 
 class AuditApplyRecordHandler(BaseHandler):
     def post(self):
