@@ -150,9 +150,7 @@ class DepartmentStatusRecordsHandler(BaseHandler):
             temp_re_list = []
             if records:
                 for record in records:
-                    if str(record.audit_status) == "0":  # 只返回没有审核的
-                        temp_re_list.append(record.to_dict(rel_query=True))
-                    else:
+                    if str(record.audit_status) == str(params.audit_status):  # 只返回没有审核的
                         temp_re_list.append(record.to_dict(rel_query=True))
             return temp_re_list
         except BaseException as e:
