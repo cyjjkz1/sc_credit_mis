@@ -128,7 +128,7 @@ class RecordListHandler(BaseHandler):
             raise e
 
 
-class DepartmentRecordsHandler(BaseHandler):
+class DepartmentStatusRecordsHandler(BaseHandler):
     GET_FIELDS = [SelectorField(
         fields=[
             OPTION_status
@@ -159,6 +159,28 @@ class DepartmentRecordsHandler(BaseHandler):
             db.session.rollback()
             raise e
 
+
+# 返回部门全部
+class DepartmentAllRecordsHandler(BaseHandler):
+
+    def get(self):
+        get_ret = self.handle()
+        return jsonify(get_ret)
+
+    @with_credit_user
+    def _handle(self, *args, **kwargs):
+        try:
+            user = self.credit_user
+            department = user.audit_department
+            records = department.records
+            temp_re_list = []
+            if records:
+                for record in records:
+                    temp_re_list.append(record.to_dict(rel_query=True))
+            return temp_re_list
+        except BaseException as e:
+            db.session.rollback()
+            raise e
 
 class AuditApplyRecordHandler(BaseHandler):
     def post(self):

@@ -6,7 +6,7 @@ from flask_restful import Api
 from handlers.user_handler import UserHandler, LoginHandler, LogoutHandler, ChangePasswordHandler
 from handlers.upload_handler import UploadFileHandler, DownloadHandle
 from handlers.project_handler import ProjectHandler
-from handlers.apply_handler import ApplyHandler, RecordListHandler, DepartmentRecordsHandler
+from handlers.apply_handler import ApplyHandler, RecordListHandler, DepartmentStatusRecordsHandler, DepartmentAllRecordsHandler
 from handlers.audit_handler import AuditHandler
 blue_print_user = Blueprint('blue_print_user', __name__, url_prefix='/credit/v1/api/user')
 user_api = Api(blue_print_user)
@@ -29,7 +29,9 @@ apply_api = Api(blue_print_apply)
 apply_api.add_resource(ApplyHandler, '/submit', endpoint='aupply_submit')
 apply_api.add_resource(ApplyHandler, '/info', endpoint='aupply_info')
 apply_api.add_resource(RecordListHandler, '/list')
-apply_api.add_resource(DepartmentRecordsHandler, '/department/list')
+
+apply_api.add_resource(DepartmentAllRecordsHandler, '/department/list')
+apply_api.add_resource(DepartmentStatusRecordsHandler, '/department/wait_audit')
 apply_api.add_resource(AuditHandler, '/audit', endpoint='aupply_audit')
 
 
