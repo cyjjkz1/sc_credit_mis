@@ -181,6 +181,7 @@ class DepartmentAllRecordsHandler(BaseHandler):
             department = user.audit_department
             # records = department.records
             records = ApplyRecord.query.filter_by(**params).all()
+            app.logger.info('query records = {}'.format(len(records)))
             temp_re_list = []
             if records:
                 for record in records:
