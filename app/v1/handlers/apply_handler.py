@@ -160,6 +160,13 @@ class DepartmentStatusRecordsHandler(BaseHandler):
 
 # 返回部门全部
 class DepartmentAllRecordsHandler(BaseHandler):
+    GET_FIELDS = [SelectorField(
+        fields=[
+            OPTION_year,
+            OPTION_term,
+            OPTION_status
+        ]
+    )]
 
     def get(self):
         get_ret = self.handle()
@@ -167,10 +174,11 @@ class DepartmentAllRecordsHandler(BaseHandler):
 
     @with_credit_user
     def _handle(self, *args, **kwargs):
+        params = self.parse_request_params()
+        app.logger.info('func=parse_request_params | parse_type={} | parse_params = {}'.format(type(params), params))
+        params['user_id'] = self.credit_user.id
         try:
-            user = self.credit_user
-            department = user.audit_department
-            records = department.records
+            records = ApplyRecord.query.filter_by(**params).all()
             temp_re_list = []
             if records:
                 for record in records:

@@ -31,7 +31,7 @@ apply_api.add_resource(ApplyHandler, '/info', endpoint='aupply_info')
 apply_api.add_resource(RecordListHandler, '/list')
 
 apply_api.add_resource(DepartmentStatusRecordsHandler, '/department/list')
-apply_api.add_resource(DepartmentAllRecordsHandler, '/department/wait_audit')
+apply_api.add_resource(DepartmentAllRecordsHandler, '/department/all_records')
 apply_api.add_resource(AuditHandler, '/audit', endpoint='aupply_audit')
 
 
