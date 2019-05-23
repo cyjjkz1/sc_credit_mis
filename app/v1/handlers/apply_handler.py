@@ -182,6 +182,7 @@ class DepartmentAllRecordsHandler(BaseHandler):
             db.session.rollback()
             raise e
 
+
 class AuditApplyRecordHandler(BaseHandler):
     def post(self):
         ret = self.handle()
