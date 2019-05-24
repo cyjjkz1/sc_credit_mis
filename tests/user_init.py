@@ -15,7 +15,7 @@ def md5(text):
 
 class UserAdd(Command):
     def run(self):
-        user = User(name='黄二蛋', password=md5('123456'), account='13541134276', role='2', class_name='2020级3班')
+        user = User(name='黄家驹', password=md5('123456'), account='13541134276', role='2', class_name='2020级3班')
         col = College.query.filter_by(name='计算机学院').first()
         maj = Major.query.filter_by(name='计算机科学与技术').first()
         user.college = col
@@ -23,7 +23,7 @@ class UserAdd(Command):
         db.session.add(user)
         db.session.commit()
 
-        user = User(name='黄一蛋', password=md5('123456'), account='13500001111', role='2', class_name='2020级3班')
+        user = User(name='黄雪梅', password=md5('123456'), account='13500001111', role='2', class_name='2020级3班')
         col = College.query.filter_by(name='计算机学院').first()
         maj = Major.query.filter_by(name='计算机科学与技术').first()
         user.college = col
@@ -31,7 +31,7 @@ class UserAdd(Command):
         db.session.add(user)
         db.session.commit()
 
-        user = User(name='黄三蛋', password=md5('123456'), account='13500003333', role='2', class_name='2020级3班')
+        user = User(name='黄丽', password=md5('123456'), account='13500003333', role='2', class_name='2020级3班')
         col = College.query.filter_by(name='计算机学院').first()
         maj = Major.query.filter_by(name='计算机科学与技术').first()
         user.college = col
@@ -39,7 +39,7 @@ class UserAdd(Command):
         db.session.add(user)
         db.session.commit()
 
-        user = User(name='黄四蛋', password=md5('123456'), account='13500004444', role='2', class_name='2020级3班')
+        user = User(name='黄家辉', password=md5('123456'), account='13500004444', role='2', class_name='2020级3班')
         col = College.query.filter_by(name='计算机学院').first()
         maj = Major.query.filter_by(name='计算机科学与技术').first()
         user.college = col
@@ -58,7 +58,6 @@ class UserAdd(Command):
         user.audit_department = dep
         db.session.add(user)
         db.session.commit()
-
 
 
 class UserDelete(Command):
