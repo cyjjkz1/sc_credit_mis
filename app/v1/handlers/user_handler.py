@@ -72,6 +72,7 @@ class LoginHandler(BaseHandler):
                 session = Session(session_id=new_session_id)
                 user.session = session
                 user.save()
+                session.save()
                 app.logger.info('db crete new session = {}'.format(session.to_dict()))
                 return {'sessionid': new_session_id, 'user_id': user.id, "name": user.name, "role": user.role}
             else:
