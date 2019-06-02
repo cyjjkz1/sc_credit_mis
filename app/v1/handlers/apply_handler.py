@@ -28,7 +28,8 @@ POST_audit_department_id = RequiredField('audit_department_id',
 
 GET_record_id = RequiredField('id', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,}'))
 
-OPTION_name = OptionalField(src_name='name',converter=converter.TypeConverter(str), checker=LenChecker(max_len=20, min_len=1))
+OPTION_name = RequiredField(src_name='name', converter=converter.TypeConverter(str),
+                            checker=LenChecker(max_len=20, min_len=1))
 
 OPTION_year = OptionalField(src_name='apply_year',
                             converter=converter.TypeConverter(str),
@@ -151,11 +152,11 @@ class DepartmentStatusRecordsHandler(BaseHandler):
         try:
             user = self.credit_user
             department = user.audit_department
-            records = department.records
+            records = ApplyRecord.query.filter_by(**params).all()
             temp_re_list = []
             if records:
                 for record in records:
-                    if str(record.audit_status) == str(params['audit_status']):  # 只返回没有审核的
+                    if str(department.id) == record.audit_department_id and str(record.audit_status) == str(params['audit_status']):  # 只返回没有审核的
                         temp_re_list.append(record.to_dict(rel_query=True))
             return temp_re_list
         except BaseException as e:
