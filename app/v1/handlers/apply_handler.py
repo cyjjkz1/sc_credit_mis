@@ -28,7 +28,7 @@ POST_audit_department_id = RequiredField('audit_department_id',
 
 GET_record_id = RequiredField('id', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,}'))
 
-OPTION_name = RequiredField('name', converter=converter.TypeConverter(str),
+OPTION_name = RequiredField(src_name='name', converter=converter.TypeConverter(str),
                             checker=LenChecker(max_len=20, min_len=1))
 
 OPTION_year = OptionalField(src_name='apply_year',
