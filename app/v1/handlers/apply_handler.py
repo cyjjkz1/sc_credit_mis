@@ -28,6 +28,9 @@ POST_audit_department_id = RequiredField('audit_department_id',
 
 GET_record_id = RequiredField('id', converter=converter.TypeConverter(str), checker=ReChecker(r'[0-9]{1,}'))
 
+OPTION_name = RequiredField('name', converter=converter.TypeConverter(str),
+                            checker=LenChecker(max_len=20, min_len=1))
+
 OPTION_year = OptionalField(src_name='apply_year',
                             converter=converter.TypeConverter(str),
                             checker=ReChecker(r'[0-9~]{1,20}'))
@@ -131,6 +134,9 @@ class RecordListHandler(BaseHandler):
 class DepartmentStatusRecordsHandler(BaseHandler):
     GET_FIELDS = [SelectorField(
         fields=[
+            OPTION_name,
+            OPTION_year,
+            OPTION_term,
             OPTION_status
         ]
     )]
