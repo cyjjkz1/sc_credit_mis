@@ -21240,3 +21240,70 @@ Accept-Encoding: gzip, deflate
 [2019-06-02 08:59:26,051] INFO in base_handler: func=_handle|_handle_ret_params=[{'project_classify': u'\u7ade\u8d5b\u9879\u76ee', 'project_name': u'\u6821\u8fd0\u52a8\u961f--\u8bad\u7ec3', 'apply_year': u'2013~1014', 'create_time': '2019-05-25 14:39:43', 'audit_remark': None, 'audit_status': 0, 'apply_detail': u'\u5b89\u5fbd\u4f1a\u8ba1\u5e08\u5730\u8d1f\u6d77\u6db5\u963f\u58eb\u5927\u592b\u6492\u65e6\u963f\u65af\u987f\u53d1\u751f\u5927\u6cd5\u5e08\u6253\u53d1\u65af\u8482\u82ac', 'id': 1, 'apply_remark': u'\u963f\u65af\u8482\u82ac\u5730\u65b9\u963f\u65af\u987f\u53d1\u751f\u5927\u6cd5\u5e08\u6253\u53d1\u65af\u8482\u82ac\u963f\u65af\u8482\u82ac', 'name': u'\u9ec4\u96ea\u6885', 'apply_file': u'20190525144518624510.docx', 'audit_credit': 0, 'audit_department': u'\u56e2\u59d4', 'apply_term': 1, 'apply_credit': 4}, {'project_classify': u'\u5e7f\u64ad\u7535\u89c6\u5b9e\u8df5\u9879\u76ee', 'project_name': u'\u5e7f\u64ad\u7535\u89c6\u680f\u76ee\u4e3b\u521b', 'apply_year': u'2016~2017', 'create_time': '2019-06-01 14:56:22', 'audit_remark': None, 'audit_status': 0, 'apply_detail': u'afsdfasdfsdfasdfasdgsdfhfghdfgdfghdfgjdfgjfghdfhgdfgh', 'id': 9, 'apply_remark': u'dfasdfasdfasdfasdfasdfasdfasdfasdfasdfasd', 'name': u'\u9ec4\u4e3d', 'apply_file': u'20190602072827328496.doc', 'audit_credit': 0, 'audit_department': u'\u56e2\u59d4', 'apply_term': 2, 'apply_credit': 4}, {'project_classify': u'\u7ade\u8d5b\u9879\u76ee', 'project_name': u'\u4e52\u4e53\u7403--\u5168\u56fd\u5927\u8d5b', 'apply_year': u'2014~2015', 'create_time': '2019-06-01 14:56:22', 'audit_remark': None, 'audit_status': 0, 'apply_detail': u'dsagasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf', 'id': 10, 'apply_remark': u'afasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasd', 'name': u'\u9ec4\u5bb6\u8f89', 'apply_file': u'20190602072922629336.docx', 'audit_credit': 0, 'audit_department': u'\u56e2\u59d4', 'apply_term': 2, 'apply_credit': 4}]
 [2019-06-02 08:59:26,052] INFO in base_handler: func=request_finish|request_finish_params={'resperr': '\xe6\x88\x90\xe5\x8a\x9f', 'respcd': '0000', 'respmsg': '', 'data': [{'project_classify': u'\u7ade\u8d5b\u9879\u76ee', 'project_name': u'\u6821\u8fd0\u52a8\u961f--\u8bad\u7ec3', 'apply_year': u'2013~1014', 'create_time': '2019-05-25 14:39:43', 'audit_remark': None, 'audit_status': 0, 'apply_detail': u'\u5b89\u5fbd\u4f1a\u8ba1\u5e08\u5730\u8d1f\u6d77\u6db5\u963f\u58eb\u5927\u592b\u6492\u65e6\u963f\u65af\u987f\u53d1\u751f\u5927\u6cd5\u5e08\u6253\u53d1\u65af\u8482\u82ac', 'id': 1, 'apply_remark': u'\u963f\u65af\u8482\u82ac\u5730\u65b9\u963f\u65af\u987f\u53d1\u751f\u5927\u6cd5\u5e08\u6253\u53d1\u65af\u8482\u82ac\u963f\u65af\u8482\u82ac', 'name': u'\u9ec4\u96ea\u6885', 'apply_file': u'20190525144518624510.docx', 'audit_credit': 0, 'audit_department': u'\u56e2\u59d4', 'apply_term': 1, 'apply_credit': 4}, {'project_classify': u'\u5e7f\u64ad\u7535\u89c6\u5b9e\u8df5\u9879\u76ee', 'project_name': u'\u5e7f\u64ad\u7535\u89c6\u680f\u76ee\u4e3b\u521b', 'apply_year': u'2016~2017', 'create_time': '2019-06-01 14:56:22', 'audit_remark': None, 'audit_status': 0, 'apply_detail': u'afsdfasdfsdfasdfasdgsdfhfghdfgdfghdfgjdfgjfghdfhgdfgh', 'id': 9, 'apply_remark': u'dfasdfasdfasdfasdfasdfasdfasdfasdfasdfasd', 'name': u'\u9ec4\u4e3d', 'apply_file': u'20190602072827328496.doc', 'audit_credit': 0, 'audit_department': u'\u56e2\u59d4', 'apply_term': 2, 'apply_credit': 4}, {'project_classify': u'\u7ade\u8d5b\u9879\u76ee', 'project_name': u'\u4e52\u4e53\u7403--\u5168\u56fd\u5927\u8d5b', 'apply_year': u'2014~2015', 'create_time': '2019-06-01 14:56:22', 'audit_remark': None, 'audit_status': 0, 'apply_detail': u'dsagasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf', 'id': 10, 'apply_remark': u'afasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasd', 'name': u'\u9ec4\u5bb6\u8f89', 'apply_file': u'20190602072922629336.docx', 'audit_credit': 0, 'audit_department': u'\u56e2\u59d4', 'apply_term': 2, 'apply_credit': 4}]}
 [2019-06-02 08:59:26,052] INFO in base_handler: <<<< END app.v1.handlers.apply_handler.DepartmentStatusRecordsHandler >>>>
+[2019-06-02 09:04:32 +0000] [4570] [INFO] Starting gunicorn 19.9.0
+[2019-06-02 09:04:32 +0000] [4570] [INFO] Listening at: http://0.0.0.0:9066 (4570)
+[2019-06-02 09:04:32 +0000] [4570] [INFO] Using worker: sync
+[2019-06-02 09:04:32 +0000] [4575] [INFO] Booting worker with pid: 4575
+[2019-06-02 09:04:32 +0000] [4576] [INFO] Booting worker with pid: 4576
+[2019-06-02 09:04:33 +0000] [4575] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/root/Envs/sc_credit_mis/lib/python2.7/site-packages/gunicorn/arbiter.py", line 583, in spawn_worker
+    worker.init_process()
+  File "/root/Envs/sc_credit_mis/lib/python2.7/site-packages/gunicorn/workers/base.py", line 129, in init_process
+    self.load_wsgi()
+  File "/root/Envs/sc_credit_mis/lib/python2.7/site-packages/gunicorn/workers/base.py", line 138, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/root/Envs/sc_credit_mis/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/root/Envs/sc_credit_mis/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 52, in load
+    return self.load_wsgiapp()
+  File "/root/Envs/sc_credit_mis/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 41, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/root/Envs/sc_credit_mis/lib/python2.7/site-packages/gunicorn/util.py", line 350, in import_app
+    __import__(module)
+  File "/root/my_project/sc_credit_mis/main.py", line 6, in <module>
+    app = create_app(os.getenv('FLASK_CONFIG') or 'default')
+  File "/root/my_project/sc_credit_mis/app/__init__.py", line 22, in create_app
+    from v1.urls import blue_print_user, blue_print_upload, blue_print_project, blue_print_apply
+  File "/root/my_project/sc_credit_mis/app/v1/urls.py", line 9, in <module>
+    from handlers.apply_handler import ApplyHandler, RecordListHandler, DepartmentStatusRecordsHandler, DepartmentAllRecordsHandler
+  File "/root/my_project/sc_credit_mis/app/v1/handlers/apply_handler.py", line 134, in <module>
+    class DepartmentStatusRecordsHandler(BaseHandler):
+  File "/root/my_project/sc_credit_mis/app/v1/handlers/apply_handler.py", line 140, in DepartmentStatusRecordsHandler
+    OPTION_status
+  File "/root/Envs/sc_credit_mis/lib/python2.7/site-packages/data_packer/field/multi.py", line 33, in __init__
+    raise err.DataPackerProgramError('SelectorField Only consists of {}'.format(self.valid_field_cls))
+DataPackerProgramError: SelectorField Only consists of (<class 'data_packer.field.single.OptionalField'>,)
+[2019-06-02 09:04:33 +0000] [4575] [INFO] Worker exiting (pid: 4575)
+[2019-06-02 09:04:33 +0000] [4576] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/root/Envs/sc_credit_mis/lib/python2.7/site-packages/gunicorn/arbiter.py", line 583, in spawn_worker
+    worker.init_process()
+  File "/root/Envs/sc_credit_mis/lib/python2.7/site-packages/gunicorn/workers/base.py", line 129, in init_process
+    self.load_wsgi()
+  File "/root/Envs/sc_credit_mis/lib/python2.7/site-packages/gunicorn/workers/base.py", line 138, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/root/Envs/sc_credit_mis/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/root/Envs/sc_credit_mis/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 52, in load
+    return self.load_wsgiapp()
+  File "/root/Envs/sc_credit_mis/lib/python2.7/site-packages/gunicorn/app/wsgiapp.py", line 41, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/root/Envs/sc_credit_mis/lib/python2.7/site-packages/gunicorn/util.py", line 350, in import_app
+    __import__(module)
+  File "/root/my_project/sc_credit_mis/main.py", line 6, in <module>
+    app = create_app(os.getenv('FLASK_CONFIG') or 'default')
+  File "/root/my_project/sc_credit_mis/app/__init__.py", line 22, in create_app
+    from v1.urls import blue_print_user, blue_print_upload, blue_print_project, blue_print_apply
+  File "/root/my_project/sc_credit_mis/app/v1/urls.py", line 9, in <module>
+    from handlers.apply_handler import ApplyHandler, RecordListHandler, DepartmentStatusRecordsHandler, DepartmentAllRecordsHandler
+  File "/root/my_project/sc_credit_mis/app/v1/handlers/apply_handler.py", line 134, in <module>
+    class DepartmentStatusRecordsHandler(BaseHandler):
+  File "/root/my_project/sc_credit_mis/app/v1/handlers/apply_handler.py", line 140, in DepartmentStatusRecordsHandler
+    OPTION_status
+  File "/root/Envs/sc_credit_mis/lib/python2.7/site-packages/data_packer/field/multi.py", line 33, in __init__
+    raise err.DataPackerProgramError('SelectorField Only consists of {}'.format(self.valid_field_cls))
+DataPackerProgramError: SelectorField Only consists of (<class 'data_packer.field.single.OptionalField'>,)
+[2019-06-02 09:04:33 +0000] [4576] [INFO] Worker exiting (pid: 4576)
+[2019-06-02 09:04:33 +0000] [4570] [INFO] Shutting down: Master
+[2019-06-02 09:04:33 +0000] [4570] [INFO] Reason: Worker failed to boot.

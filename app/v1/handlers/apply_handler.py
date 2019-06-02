@@ -134,9 +134,6 @@ class RecordListHandler(BaseHandler):
 class DepartmentStatusRecordsHandler(BaseHandler):
     GET_FIELDS = [SelectorField(
         fields=[
-            OPTION_name,
-            OPTION_year,
-            OPTION_term,
             OPTION_status
         ]
     )]
@@ -152,11 +149,11 @@ class DepartmentStatusRecordsHandler(BaseHandler):
         try:
             user = self.credit_user
             department = user.audit_department
-            records = ApplyRecord.query.filter_by(**params).all()
+            records = department.records
             temp_re_list = []
             if records:
                 for record in records:
-                    if str(department.id) == record.audit_department_id and str(record.audit_status) == str(params['audit_status']):  # 只返回没有审核的
+                    if str(record.audit_status) == str(params['audit_status']):  # 只返回没有审核的
                         temp_re_list.append(record.to_dict(rel_query=True))
             return temp_re_list
         except BaseException as e:
